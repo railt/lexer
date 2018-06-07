@@ -1,0 +1,43 @@
+{
+    "name": "railt/lexer",
+    "type": "library",
+    "description": "Extremely fast implementation of the stateful and stateless lexers",
+    "license": "MIT",
+    "keywords": ["lexer", "language", "php"],
+    "homepage": "http://railt.org",
+    "support": {
+        "issues": "https://github.com/railt/railt/issues",
+        "source": "https://github.com/railt/compiler"
+    },
+    "authors": [
+        {
+            "name": "Kirill Nesmeyanov",
+            "email": "nesk@xakep.ru"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.3",
+        "ext-spl": "*",
+        "ext-pcre": "*",
+        "ext-mbstring": "*",
+        "railt/io": "1.2.*|dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Railt\\Lexer\\": "src"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Railt\\Tests\\Lexer\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
