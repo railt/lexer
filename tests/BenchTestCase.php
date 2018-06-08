@@ -25,7 +25,7 @@ class BenchTestCase extends BaseTestCase
     private const TEMPLATE =
         '
 %s:
-| Sample        | %s (%d tokens)
+| Sample        | %s (%d tokens per file, %d iterations)
 | Time          | %01.5fs
 | AVG           | %01.5fs
 | Token/s       | %d
@@ -46,6 +46,7 @@ class BenchTestCase extends BaseTestCase
             \basename(\str_replace('\\', '/', \get_class($lexer))),
             \basename($sources->getPathname()),
             $tokens / \count($results),
+            \count($results),
             $sum,                       /* SUM */
             $avg,                       /* AVG */
             $tokens / $sum              /* TPS */
