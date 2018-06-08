@@ -26,6 +26,6 @@ final class Unknown extends Token
      */
     public function __construct(string $value, int $offset = 0)
     {
-        parent::__construct(static::UNKNOWN_TOKEN, $value, $offset);
+        parent::__construct(static::T_NAME, $value, $offset);
     }
 }

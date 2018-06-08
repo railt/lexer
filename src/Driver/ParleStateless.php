@@ -9,22 +9,22 @@ declare(strict_types=1);
 
 namespace Railt\Lexer\Driver;
 
-use Parle\Lexer;
+use Parle\Lexer as Parle;
 use Parle\LexerException;
 use Parle\Token as InternalToken;
+use Railt\Io\Readable;
 use Railt\Lexer\Exception\BadLexemeException;
 use Railt\Lexer\Exception\UnsupportedLexerRuntimeException;
 use Railt\Lexer\Result\Eoi;
 use Railt\Lexer\Result\Token;
 use Railt\Lexer\Result\Unknown;
-use Railt\Io\Readable;
 use Railt\Lexer\Stateless;
 use Railt\Lexer\TokenInterface;
 
 /**
  * Class ParleStateless
  */
-class ParleStateless implements Stateless
+class ParleStateless extends Lexer implements Stateless
 {
     /**
      * @var array|string[]
@@ -37,17 +37,12 @@ class ParleStateless implements Stateless
     private $tokens = [];
 
     /**
-     * @var array|string[]
-     */
-    private $skip = [];
-
-    /**
      * @var int
      */
     private $id = 1;
 
     /**
-     * @var Lexer
+     * @var Parle
      */
     private $lexer;
 
@@ -57,20 +52,21 @@ class ParleStateless implements Stateless
      */
     public function __construct()
     {
-        if (! \class_exists(Lexer::class)) {
+        if (! \class_exists(Parle::class)) {
             throw new UnsupportedLexerRuntimeException('This runtime required parle extension');
         }
 
-        $this->lexer = new Lexer();
+        $this->lexer = new Parle();
     }
 
     /**
      * @param string $name
      * @param string $pcre
+     * @param bool $skip
      * @return Stateless
      * @throws \Railt\Lexer\Exception\BadLexemeException
      */
-    public function add(string $name, string $pcre): Stateless
+    public function add(string $name, string $pcre, bool $skip = false): Stateless
     {
         try {
             $this->lexer->push($pcre, $this->id);
@@ -83,18 +79,11 @@ class ParleStateless implements Stateless
             throw new BadLexemeException($message);
         }
 
+        if ($skip) {
+            $this->skip[] = $name;
+        }
+
         ++$this->id;
-
-        return $this;
-    }
-
-    /**
-     * @param string $name
-     * @return Stateless
-     */
-    public function skip(string $name): Stateless
-    {
-        $this->skip[] = $name;
 
         return $this;
     }
@@ -102,7 +91,7 @@ class ParleStateless implements Stateless
     /**
      * @return iterable
      */
-    public function getTokens(): iterable
+    public function getDefinedTokens(): iterable
     {
         foreach ($this->tokens as $id => $pcre) {
             yield $this->map[$id] => $pcre;
@@ -111,55 +100,77 @@ class ParleStateless implements Stateless
 
     /**
      * @param Readable $input
-     * @return \Traversable
-     */
-    public function lex(Readable $input): \Traversable
-    {
-        foreach ($this->exec($input) as $token) {
-            if (! \in_array($token->name(), $this->skip, true)) {
-                yield $token;
-            }
-        }
-    }
-
-    /**
-     * @param Readable $input
      * @return \Traversable|TokenInterface[]
      */
-    private function exec(Readable $input): \Traversable
+    protected function exec(Readable $input): \Traversable
     {
-        $this->lexer->build();
-        $this->lexer->consume($input->getContents());
+        $iterator = $this->getInnerIterator($input);
 
-        $token = $this->next();
+        while ($iterator->valid()) {
+            /** @var InternalToken $current */
+            $current = $iterator->current();
 
-        while ($token->id !== InternalToken::EOI) {
-            yield $token->id === InternalToken::UNKNOWN
-                ? new Unknown($token->value, $this->lexer->marker)
-                : new Token($this->map[$token->id], $token->value, $this->lexer->marker);
-
-            $token = $this->next();
+            /** @var TokenInterface $token */
+            yield $current->id === InternalToken::UNKNOWN
+                ? $this->unknown($iterator)
+                : $this->token($iterator);
         }
 
         yield new Eoi($this->lexer->marker);
     }
 
     /**
-     * @return InternalToken
+     * @param \Traversable|\Iterator $iterator
+     * @return Token
      */
-    private function next(): InternalToken
+    private function token(\Traversable $iterator): TokenInterface
     {
-        $this->lexer->advance();
+        /** @var InternalToken $current */
+        $current = $iterator->current();
 
-        return $this->lexer->getToken();
+        $iterator->next();
+
+        return new Token($this->map[$current->id], $current->value, $this->lexer->marker);
     }
 
     /**
-     * @return iterable
+     * @param Readable $input
+     * @return \Generator|\Traversable
      */
-    public function getIgnoredTokens(): iterable
+    protected function getInnerIterator(Readable $input): \Traversable
     {
-        return \array_values($this->skip);
+        $this->lexer->build();
+        $this->lexer->consume($input->getContents());
+
+        $this->lexer->advance();
+        $token = $this->lexer->getToken();
+
+        while ($token->id !== InternalToken::EOI) {
+            yield $token->id => $token;
+
+            $this->lexer->advance();
+            $token = $this->lexer->getToken();
+        }
+    }
+
+    /**
+     * @param \Traversable|\Generator $iterator
+     * @return Unknown
+     */
+    private function unknown(\Traversable $iterator): TokenInterface
+    {
+        /** @var InternalToken $current */
+        $current = $iterator->current();
+        $offset = $this->lexer->marker;
+        $body = '';
+
+        while ($current->id === InternalToken::UNKNOWN) {
+            $body .= $current->value;
+            $iterator->next();
+            $current = $iterator->current();
+        }
+
+        return new Unknown($body, $offset);
     }
 
     /**

@@ -12,11 +12,12 @@ namespace Railt\Lexer\Driver;
 use Railt\Io\Readable;
 use Railt\Lexer\Driver\Common\PCRECompiler;
 use Railt\Lexer\Stateless;
+use Railt\Lexer\TokenInterface;
 
 /**
  * Class NativeStateless
  */
-class NativeStateless extends NativeStateful implements Stateless
+class NativeStateless extends Lexer implements Stateless
 {
     /**
      * @var PCRECompiler
@@ -29,31 +30,6 @@ class NativeStateless extends NativeStateful implements Stateless
     public function __construct()
     {
         $this->pcre = new PCRECompiler();
-        parent::__construct('');
-    }
-
-    /**
-     * @param Readable $input
-     * @return \Traversable
-     */
-    public function lex(Readable $input): \Traversable
-    {
-        foreach (parent::exec($this->pcre->compile(), $input->getContents()) as $token) {
-            if (! \in_array($token->name(), $this->skipped, true)) {
-                yield $token;
-            }
-        }
-    }
-
-    /**
-     * @param string $name
-     * @return Stateless
-     */
-    public function skip(string $name): Stateless
-    {
-        $this->skipped[] = $name;
-
-        return $this;
     }
 
     /**
@@ -64,7 +40,11 @@ class NativeStateless extends NativeStateful implements Stateless
      */
     public function add(string $name, string $pcre, bool $skip = false): Stateless
     {
-        $this->pcre->addToken($name, $pcre);
+        $this->pcre->add($name, $pcre);
+
+        if ($skip) {
+            $this->skip[] = $name;
+        }
 
         return $this;
     }
@@ -87,11 +67,13 @@ class NativeStateless extends NativeStateful implements Stateless
     }
 
     /**
-     * @param string $name
-     * @return bool
+     * @param Readable $file
+     * @return \Traversable|TokenInterface
      */
-    public function isSkipped(string $name): bool
+    protected function exec(Readable $file): \Traversable
     {
-        return \in_array($name, $this->skipped, true);
+        $lexer = new NativeStateful($this->pcre->compile(), $this->skip);
+
+        return $lexer->lex($file, true);
     }
 }
