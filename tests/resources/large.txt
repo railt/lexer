@@ -24,65 +24,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -109,65 +50,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -194,65 +76,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -279,65 +102,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -364,65 +128,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -449,65 +154,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -534,65 +180,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -619,65 +206,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -704,65 +232,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -789,65 +258,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -874,65 +284,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -959,65 +310,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1044,65 +336,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1129,65 +362,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1214,65 +388,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1299,65 +414,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1384,65 +440,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1469,65 +466,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1554,65 +492,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1639,65 +518,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1724,65 +544,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1809,65 +570,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1894,65 +596,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -1979,65 +622,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2064,65 +648,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2149,65 +674,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2234,65 +700,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2319,65 +726,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2404,65 +752,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2489,65 +778,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2574,65 +804,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2659,65 +830,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2744,65 +856,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2829,65 +882,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2914,65 +908,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -2999,65 +934,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3084,65 +960,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3169,65 +986,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3254,65 +1012,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3339,65 +1038,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3424,65 +1064,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3509,65 +1090,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3594,65 +1116,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3679,65 +1142,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3764,65 +1168,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3849,65 +1194,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -3934,65 +1220,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4019,65 +1246,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4104,65 +1272,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4189,65 +1298,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4274,65 +1324,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4359,65 +1350,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4444,65 +1376,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4529,65 +1402,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4614,65 +1428,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4699,65 +1454,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4784,65 +1480,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4869,65 +1506,6 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
-
-interface Bar {
-    one: Type
-    four(argument: String = "string"): String
-}
-
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
-}
-
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
-}
-
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
-}
-
-input InputType {
-    key: String!
-    answer: Int = 42
-}
-
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
-}
-
-extend type Foo {
-    seven(argument: [String]): Type
-}
-
-extend type Foo @onType {}
-
-type NoFields {}
-
-directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-directive @include(if: Boolean!)
-on FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
-directive @include2(if: Boolean!) on
-| FIELD
-| FRAGMENT_SPREAD
-| INLINE_FRAGMENT
-
 schema {
     query: QueryType
     mutation: MutationType
@@ -4954,47 +1532,1069 @@ type Foo implements Bar {
 type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
     annotatedField(arg: Type = "default" @onArg): Type @onField
 }
+schema {
+    query: QueryType
+    mutation: MutationType
+}
 
-interface Bar {
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
     one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
     four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
 }
 
-interface AnnotatedInterface @onInterface {
-    annotatedField(arg: Type @onArg): Type @onField
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
 }
 
-union Feed = Story | Article | Advert
-
-union AnnotatedUnion @onUnion = A | B
-
-union AnnotatedUnionTwo @onUnion = | A | B
-
-scalar CustomScalar
-
-scalar AnnotatedScalar @onScalar
-
-enum Site {
-    DESKTOP
-    MOBILE
+schema Example {
+    mutation: MutationType
+    query: QueryType
 }
 
-enum AnnotatedEnum @onEnum {
-    ANNOTATED_VALUE @onEnumValue
-    OTHER_VALUE
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
 }
 
-input InputType {
-    key: String!
-    answer: Int = 42
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
 }
 
-input AnnotatedInput @onInputObjectType {
-    annotatedField: Type @onField
+schema Example {
+    mutation: MutationType
+    query: QueryType
 }
 
-extend type Foo {
-    seven(argument: [String]): Type
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
 }
 
-extend type Foo @onType {}
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}
+schema {
+    query: QueryType
+    mutation: MutationType
+}
+
+schema Example {
+    mutation: MutationType
+    query: QueryType
+}
+
+type Foo implements Bar {
+    one: Type
+    two(argument: InputType!): Type
+    three(argument: InputType, other: String): Int
+    four(argument: String = "string"): String
+    five(argument: [String] = ["string", "string"]): String
+    six(argument: InputType = {
+    key: "value",
+    key2: ["value1", "value2"]
+}): Type
+    seven(argument: Int = null): Type
+}
+
+type AnnotatedObject @onObject(arg: "value", arg2: [Relation]) {
+    annotatedField(arg: Type = "default" @onArg): Type @onField
+}

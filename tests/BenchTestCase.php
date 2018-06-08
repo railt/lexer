@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Railt\Tests\Lexer;
 
 use Railt\Io\File;
+use Railt\Io\Readable;
 use Railt\Lexer\Driver\Common\PCRECompiler;
 use Railt\Lexer\Driver\NativeStateful;
 use Railt\Lexer\Driver\NativeStateless;
@@ -21,136 +22,120 @@ use Railt\Lexer\LexerInterface;
  */
 class BenchTestCase extends BaseTestCase
 {
+    private const TEMPLATE =
+        '
+%s:
+| Sample        | %s (%d tokens)
+| Time          | %01.5fs
+| AVG           | %01.5fs
+| Token/s       | %d
+';
+
+    /**
+     * @param LexerInterface $lexer
+     * @param array $results
+     * @param int $tokens
+     * @param Readable $sources
+     */
+    private function write(LexerInterface $lexer, array $results, int $tokens, Readable $sources): void
+    {
+        $sum = \array_sum($results);
+        $avg = $sum / \count($results);
+
+        echo \vsprintf(self::TEMPLATE, [
+            \basename(\str_replace('\\', '/', \get_class($lexer))),
+            \basename($sources->getPathname()),
+            $tokens / \count($results),
+            $sum,                       /* SUM */
+            $avg,                       /* AVG */
+            $tokens / $sum              /* TPS */
+        ]);
+        \flush();
+    }
+
     /**
      * @return array
      */
-    public function provider(): array
+    public function benchesProvider(): array
+    {
+        return [
+            [1000, File::fromPathname(__DIR__ . '/resources/little.txt')],
+            [100, File::fromPathname(__DIR__ . '/resources/average.txt')],
+            [10, File::fromPathname(__DIR__ . '/resources/large.txt')],
+        ];
+    }
+
+    /**
+     * @dataProvider benchesProvider
+     * @param int $samples
+     * @param Readable $sources
+     */
+    public function testParleLexer(int $samples, Readable $sources): void
     {
         $tokens = require __DIR__ . '/resources/graphql.lex.php';
-
-        $result = [];
-
-        /**
-         * Librtl
-         */
         $lexer = new ParleStateless();
+
         foreach ($tokens as $token => $pcre) {
             $lexer->add($token, $pcre);
         }
-        $result[] = [$lexer];
 
-        /**
-         * Native (Stateless)
-         */
-        $lexer = new NativeStateless();
-        foreach ($tokens as $token => $pcre) {
-            $lexer->add($token, $pcre);
-        }
-        $result[] = [$lexer];
+        $this->execute($lexer, $samples, $sources);
+    }
 
-        /**
-         * Native stateful
-         */
+    /**
+     * @dataProvider benchesProvider
+     * @param int $samples
+     * @param Readable $sources
+     */
+    public function testNativeStatefulLexer(int $samples, Readable $sources): void
+    {
+        $tokens = require __DIR__ . '/resources/graphql.lex.php';
         $compiler = new PCRECompiler();
+
         foreach ($tokens as $token => $pcre) {
             $compiler->add($token, $pcre);
         }
         $lexer = new NativeStateful($compiler->compile(), []);
-        $result[] = [$lexer];
 
-        return $result;
+        $this->execute($lexer, $samples, $sources);
     }
 
     /**
-     * @dataProvider provider
-     * @param LexerInterface $lexer
+     * @dataProvider benchesProvider
+     * @param int $samples
+     * @param Readable $sources
      */
-    public function testLittleBench(LexerInterface $lexer): void
+    public function testNativeStatelessLexer(int $samples, Readable $sources): void
     {
-        $results = [];
-        $sources = File::fromPathname(__DIR__ . '/resources/little.txt');
+        $tokens = require __DIR__ . '/resources/graphql.lex.php';
+        $lexer = new NativeStateless();
 
-        for ($i = 0; $i < 1000; ++$i) {
+        foreach ($tokens as $token => $pcre) {
+            $lexer->add($token, $pcre);
+        }
+
+        $this->execute($lexer, $samples, $sources);
+    }
+
+    /**
+     * @param int $samples
+     * @param LexerInterface $lexer
+     * @param Readable $sources
+     */
+    private function execute(LexerInterface $lexer, int $samples, Readable $sources): void
+    {
+        $cnt = 0;
+        $results = [];
+
+        for ($i = 0; $i < $samples; ++$i) {
             $start = \microtime(true);
 
-            \iterator_to_array($lexer->lex($sources));
+            $cnt += \count(\iterator_to_array($lexer->lex($sources)));
 
             $results[] = \microtime(true) - $start;
         }
 
-        $avg = \array_sum($results) / \count($results);
-        $avg = \number_format($avg, 5);
-
-        echo \vsprintf('%s %s: avg %sms, iter %d' . "\n", [
-            __FUNCTION__,
-            \get_class($lexer),
-            $avg,
-            \count($results)
-        ]);
-        \flush();
-
-        $this->assertTrue(true);
-    }
-
-    /**
-     * @dataProvider provider
-     * @param LexerInterface $lexer
-     */
-    public function testAverageBench(LexerInterface $lexer): void
-    {
-        $results = [];
-        $sources = File::fromPathname(__DIR__ . '/resources/average.txt');
-
-        for ($i = 0; $i < 100; ++$i) {
-            $start = \microtime(true);
-
-            \iterator_to_array($lexer->lex($sources));
-
-            $results[] = \microtime(true) - $start;
-        }
-
-        $avg = \array_sum($results) / \count($results);
-        $avg = \number_format($avg, 5);
-
-        echo \vsprintf('%s %s: avg %sms, iter %d' . "\n", [
-            __FUNCTION__,
-            \get_class($lexer),
-            $avg,
-            \count($results)
-        ]);
-        \flush();
-
-        $this->assertTrue(true);
-    }
-
-    /**
-     * @dataProvider provider
-     * @param LexerInterface $lexer
-     */
-    public function testLargeBench(LexerInterface $lexer): void
-    {
-        $results = [];
-        $sources = File::fromPathname(__DIR__ . '/resources/large.txt');
-
-        for ($i = 0; $i < 10; ++$i) {
-            $start = \microtime(true);
-
-            \iterator_to_array($lexer->lex($sources));
-
-            $results[] = \microtime(true) - $start;
-        }
-
-        $avg = \array_sum($results) / \count($results);
-        $avg = \number_format($avg, 5);
-
-        echo \vsprintf('%s %s: avg %sms, iter %d' . "\n", [
-            __FUNCTION__,
-            \get_class($lexer),
-            $avg,
-            \count($results)
-        ]);
-        \flush();
-
+        $this->write($lexer, $results, $cnt, $sources);
         $this->assertTrue(true);
     }
 }
