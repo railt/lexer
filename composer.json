@@ -1,13 +1,13 @@
 {
     "name": "railt/lexer",
     "type": "library",
-    "description": "Extremely fast implementation of the stateful and stateless lexers",
+    "description": "Fast implementation of the stateful and stateless lexers",
     "license": "MIT",
     "keywords": ["lexer", "language", "php"],
     "homepage": "http://railt.org",
     "support": {
         "issues": "https://github.com/railt/railt/issues",
-        "source": "https://github.com/railt/compiler"
+        "source": "https://github.com/railt/lexer"
     },
     "authors": [
         {
