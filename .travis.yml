@@ -20,14 +20,6 @@ matrix:
 
 sudo: required
 
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - gcc-5
-    - g++-5
-
 cache:
   directories:
     - $HOME/.composer/cache
