@@ -57,15 +57,15 @@ abstract class LexerTestCase extends BaseTestCase
         $result = \iterator_to_array($lexer->lex($file));
 
         $this->assertCount(3, $result);
-        $this->assertEquals('T_DIGIT', $result[0]->name());
-        $this->assertEquals('T_UNKNOWN', $result[1]->name());
-        $this->assertEquals('T_DIGIT', $result[2]->name());
+        $this->assertSame('T_DIGIT', $result[0]->name());
+        $this->assertSame('T_UNKNOWN', $result[1]->name());
+        $this->assertSame('T_DIGIT', $result[2]->name());
 
         /** @var Unknown $unknown */
         $unknown = $result[1];
 
-        $this->assertEquals(4, $unknown->offset(), 'Bad Offset');
-        $this->assertEquals(7, $unknown->length(), 'Bad Length');
+        $this->assertSame(4, $unknown->offset(), 'Bad Offset');
+        $this->assertSame(7, $unknown->length(), 'Bad Length');
     }
 
     /**

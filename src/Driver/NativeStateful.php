@@ -35,7 +35,7 @@ class NativeStateful extends Lexer implements Stateful
     public function __construct(string $pattern, array $skipped = [])
     {
         $this->pattern = $pattern;
-        $this->skip = $skipped;
+        $this->skip    = $skipped;
     }
 
     /**

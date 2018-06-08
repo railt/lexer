@@ -161,8 +161,8 @@ class ParleStateless extends Lexer implements Stateless
     {
         /** @var InternalToken $current */
         $current = $iterator->current();
-        $offset = $this->lexer->marker;
-        $body = '';
+        $offset  = $this->lexer->marker;
+        $body    = '';
 
         while ($current->id === InternalToken::UNKNOWN) {
             $body .= $current->value;

@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Railt\Tests\Lexer;
 
 use Railt\Lexer\Driver\NativeStateless;
-use Railt\Lexer\LexerInterface;
 
 /**
  * Class NativeCompilerTestCase

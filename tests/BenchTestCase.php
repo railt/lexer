@@ -49,7 +49,7 @@ class BenchTestCase extends BaseTestCase
             \count($results),
             $sum,                       /* SUM */
             $avg,                       /* AVG */
-            $tokens / $sum              /* TPS */
+            $tokens / $sum,              /* TPS */
         ]);
         \flush();
     }
@@ -74,7 +74,7 @@ class BenchTestCase extends BaseTestCase
     public function testParleLexer(int $samples, Readable $sources): void
     {
         $tokens = require __DIR__ . '/resources/graphql.lex.php';
-        $lexer = new ParleStateless();
+        $lexer  = new ParleStateless();
 
         foreach ($tokens as $token => $pcre) {
             $lexer->add($token, $pcre);
@@ -90,7 +90,7 @@ class BenchTestCase extends BaseTestCase
      */
     public function testNativeStatefulLexer(int $samples, Readable $sources): void
     {
-        $tokens = require __DIR__ . '/resources/graphql.lex.php';
+        $tokens   = require __DIR__ . '/resources/graphql.lex.php';
         $compiler = new PCRECompiler();
 
         foreach ($tokens as $token => $pcre) {
@@ -109,7 +109,7 @@ class BenchTestCase extends BaseTestCase
     public function testNativeStatelessLexer(int $samples, Readable $sources): void
     {
         $tokens = require __DIR__ . '/resources/graphql.lex.php';
-        $lexer = new NativeStateless();
+        $lexer  = new NativeStateless();
 
         foreach ($tokens as $token => $pcre) {
             $lexer->add($token, $pcre);
@@ -125,7 +125,7 @@ class BenchTestCase extends BaseTestCase
      */
     private function execute(LexerInterface $lexer, int $samples, Readable $sources): void
     {
-        $cnt = 0;
+        $cnt     = 0;
         $results = [];
 
         for ($i = 0; $i < $samples; ++$i) {
