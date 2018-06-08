@@ -18,13 +18,14 @@ matrix:
   allow_failures:
     - php: nightly
 
-sudo: false
+sudo: true
 
 cache:
   directories:
     - $HOME/.composer/cache
 
 before_script:
+    - apt install -y g++
     - pecl install -f parle
     - echo "extension=parle.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - composer self-update -q
