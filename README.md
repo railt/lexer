@@ -10,6 +10,10 @@
     <a href="https://raw.githubusercontent.com/railt/lexer/master/LICENSE.md"><img src="https://poser.pugx.org/railt/lexer/license" alt="License MIT"></a>
 </p>
 
+> NOTE: Tests can not always pass correctly. This may be due to the inaccessibility of 
+PPA servers for updating gcc and g++. The lexertl build requires the support of a modern 
+compiler inside Travis CI. In this case, a gray badge will be displayed with the message "Build Error".
+
 # Lexer
 
 The lexer contains two types of runtime:
