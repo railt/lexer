@@ -25,7 +25,7 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-    - pecl install parle
+    - pecl install -f parle
     - echo "extension=parle.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
     - composer self-update -q
     - if [ -z "$setup" ]; then composer install; fi;
