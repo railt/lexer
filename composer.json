@@ -20,7 +20,7 @@
         "ext-spl": "*",
         "ext-pcre": "*",
         "ext-mbstring": "*",
-        "railt/io": "1.2.*|dev-master"
+        "railt/io": "1.2.*"
     },
     "autoload": {
         "psr-4": {
