@@ -14,7 +14,6 @@ use Railt\Lexer\LexerInterface;
 use Railt\Lexer\Result\Eoi;
 use Railt\Lexer\Result\Unknown;
 use Railt\Lexer\Stateless;
-use Railt\Lexer\TokenInterface;
 
 /**
  * Class LexerCompiler
@@ -54,7 +53,7 @@ abstract class LexerTestCase extends BaseTestCase
      */
     public function testUnknownLookahead(LexerInterface $lexer): void
     {
-        $file = File::fromSources("23 \nunknown \n42");
+        $file   = File::fromSources("23 \nunknown \n42");
         $result = \iterator_to_array($lexer->lex($file));
 
         $this->assertCount(3, $result);
@@ -91,6 +90,15 @@ abstract class LexerTestCase extends BaseTestCase
         $this->assertArrayHasKey('T_DIGIT', $after);
         $this->assertArrayHasKey('T_WHITESPACE', $after);
         $this->assertArrayHasKey('T_WORD', $after);
+    }
+
+    /**
+     * @param iterable|\Traversable|array $items
+     * @return array
+     */
+    protected function toArray(iterable $items): array
+    {
+        return \is_array($items) ? $items : \iterator_to_array($items);
     }
 
     /**
@@ -219,14 +227,5 @@ abstract class LexerTestCase extends BaseTestCase
         $this->assertTrue($lexer->isSkipped('T_WHITESPACE'));
         $this->assertFalse($lexer->isSkipped('T_DIGIT'));
         $this->assertTrue($lexer->isSkipped('T_WORD'));
-    }
-
-    /**
-     * @param iterable|\Traversable|array $items
-     * @return array
-     */
-    protected function toArray(iterable $items): array
-    {
-        return \is_array($items) ? $items : \iterator_to_array($items);
     }
 }
