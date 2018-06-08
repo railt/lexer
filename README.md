@@ -15,7 +15,7 @@
 
 The lexer contains two types of runtime:
 1) [`Stateless`](#stateless) - Set of algorithms for starting from scratch.
-2) [`Statful`](#statful) - Set of algorithms for run the compiled sources.
+2) [`Stateful`](#stateful) - Set of algorithms for run the compiled sources.
 
 ## Stateless
 
