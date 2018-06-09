@@ -12,6 +12,6 @@ namespace Railt\Lexer\Exception;
 /**
  * Class BadLexemeException
  */
-class BadLexemeException extends LexerException
+class BadLexemeException extends \LogicException
 {
 }
