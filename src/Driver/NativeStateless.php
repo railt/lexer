@@ -35,6 +35,8 @@ class NativeStateless extends NativeStateful implements Stateless
     /**
      * @param Readable $input
      * @return \Traversable
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function lex(Readable $input): \Traversable
     {

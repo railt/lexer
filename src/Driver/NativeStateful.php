@@ -46,6 +46,8 @@ class NativeStateful implements Stateful
     /**
      * @param Readable $input
      * @return \Traversable
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function lex(Readable $input): \Traversable
     {
@@ -60,6 +62,8 @@ class NativeStateful implements Stateful
      * @param string $pattern
      * @param string $content
      * @return \Traversable|TokenInterface[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     protected function exec(string $pattern, string $content): \Traversable
     {
