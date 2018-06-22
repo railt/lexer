@@ -11,11 +11,15 @@
     <a href="https://raw.githubusercontent.com/railt/lexer/master/LICENSE.md"><img src="https://poser.pugx.org/railt/lexer/license" alt="License MIT"></a>
 </p>
 
+> NOTE: Tests can not always pass correctly. This may be due to the inaccessibility of 
+PPA servers for updating gcc and g++. The lexertl build requires the support of a modern 
+compiler inside Travis CI. In this case, a gray badge will be displayed with the message "Build Error".
+
 # Lexer
 
 The lexer contains two types of runtime:
 1) [`Stateless`](#stateless) - Set of algorithms for starting from scratch.
-2) [`Statful`](#statful) - Set of algorithms for run the compiled sources.
+2) [`Stateful`](#stateful) - Set of algorithms for run the compiled sources.
 
 ## Stateless
 
@@ -25,7 +29,7 @@ Native implementation is based on the built-in php PCRE functions and faster
 than the original Hoa [more than **140 times**](https://github.com/hoaproject/Compiler/issues/81).
 
 ```php
-use Railt\Lexer\NativeStateless;
+use Railt\Lexer\Driver\NativeStateless;
 use Railt\Io\File;
 
 $lexer = new NativeStateless();
@@ -46,15 +50,13 @@ foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
 Experimental lexer based on the 
 [C++ lexertl library](https://github.com/BenHanson/lexertl). To use it, you 
 need support for [Parle extension](http://php.net/manual/en/book.parle.php).
-Note that this implementation is 1.5 to 3 times **slower** than the native 
-PHP implementation.
 
 ```php
-use Railt\Lexer\ParleStateless;
+use Railt\Lexer\Driver\ParleStateless;
 use Railt\Io\File;
 
 $lexer = new ParleStateless();
-$lexer->add('T_WHITESPACE', '\s+')->skip('T_WHITESPACE');
+$lexer->add('T_WHITESPACE', '\s+', true);
 $lexer->add('T_DIGIT', '\d+');
 
 foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
@@ -76,11 +78,11 @@ syntax. See the [official documentation](http://www.benhanson.net/lexertl.html).
 Native implementation is based on the built-in php PCRE functions.
 
 ```php
-use Railt\Lexer\NativeStateful;
+use Railt\Lexer\Driver\NativeStateful;
 use Railt\Io\File;
 
-$lexer = new NativeStateful($compiler->compile(), ['T_WHITESPACE']);
-//                          ^ Compiled PCRE       ^ Skipped tokens
+$lexer = new NativeStateful($pcre->compile(), ['T_WHITESPACE']);
+//                          ^ Compiled PCRE   ^ Skipped tokens
 
 foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
     echo $token->name() . ' -> ' . $token->value() . ' at ' . $token->offset() . "\n";
@@ -91,14 +93,14 @@ foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
 // T_DIGIT -> 42 at 3
 ```
 
-## Compilation
+## Compilation to PCRE
 
 ```php
-use Railt\Lexer\Common\PCRECompiler;
+use Railt\Lexer\Driver\Common\PCRECompiler;
 
 $compiler = new PCRECompiler();
-$compiler->addToken('T_WHITESPACE', '\s+');
-$compiler->addToken('T_DIGIT', '\d+');
+$compiler->add('T_WHITESPACE', '\s+');
+$compiler->add('T_DIGIT', '\d+');
 
-echo $compiler->compile(); // 
+echo $compiler->compile(); // "/\G(?P<T_WHITESPACE>\s+)|(?P<T_DIGIT>\d+)|(?P<T_UNKNOWN>.*?)/usS"
 ```

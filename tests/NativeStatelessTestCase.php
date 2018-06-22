@@ -9,18 +9,23 @@ declare(strict_types=1);
 
 namespace Railt\Tests\Lexer;
 
-use Railt\Lexer\Stateless;
+use Railt\Lexer\Driver\NativeStateless;
 
 /**
  * Class NativeCompilerTestCase
  */
-class NativeCompilerTestCase extends LexerCompilerTestCase
+class NativeStatelessTestCase extends LexerTestCase
 {
     /**
-     * @return Stateless
+     * @return array
      */
-    protected function mock(): Stateless
+    public function provider(): array
     {
-        return new NativeStateless();
+        $lexer = new NativeStateless();
+
+        $lexer->add('T_WHITESPACE', '\s+', true);
+        $lexer->add('T_DIGIT', '\d+');
+
+        return [[$lexer]];
     }
 }

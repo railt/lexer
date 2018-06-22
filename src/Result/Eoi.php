@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace Railt\Lexer\Result;
 
-use Railt\Lexer\TokenInterface;
-
 /**
  * Class Eoi
  */

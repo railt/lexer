@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Railt\Lexer\Driver\Common;
 
 use Railt\Lexer\Result\Unknown;
-use Railt\Lexer\Stateful;
 
 /**
  * Class PCRECompiler
@@ -32,13 +31,22 @@ class PCRECompiler
     protected $tokens = [];
 
     /**
-     * @param string $name
+     * PCRECompiler constructor.
+     * @param array $tokens
+     */
+    public function __construct(array $tokens = [])
+    {
+        $this->tokens = $tokens;
+    }
+
+    /**
+     * @param string $token
      * @param string $pcre
      * @return PCRECompiler
      */
-    public function addToken(string $name, string $pcre): self
+    public function add(string $token, string $pcre): self
     {
-        $this->tokens[$name] = $pcre;
+        $this->tokens[$token] = $pcre;
 
         return $this;
     }
