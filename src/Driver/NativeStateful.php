@@ -20,17 +20,12 @@ use Railt\Lexer\TokenInterface;
 /**
  * Class NativeStateful
  */
-class NativeStateful implements Stateful
+class NativeStateful extends Lexer implements Stateful
 {
     /**
      * @var string
      */
     protected $pattern;
-
-    /**
-     * @var array
-     */
-    protected $skipped;
 
     /**
      * NativeStateful constructor.
@@ -40,35 +35,19 @@ class NativeStateful implements Stateful
     public function __construct(string $pattern, array $skipped = [])
     {
         $this->pattern = $pattern;
-        $this->skipped = $skipped;
+        $this->skip    = $skipped;
     }
 
     /**
-     * @param Readable $input
+     * @param Readable $file
      * @return \Traversable
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function lex(Readable $input): \Traversable
-    {
-        foreach ($this->exec($this->pattern, $input->getContents()) as $token) {
-            if (! \in_array($token->name(), $this->skipped, true)) {
-                yield $token;
-            }
-        }
-    }
-
-    /**
-     * @param string $pattern
-     * @param string $content
-     * @return \Traversable|TokenInterface[]
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     */
-    protected function exec(string $pattern, string $content): \Traversable
+    protected function exec(Readable $file): \Traversable
     {
         $offset = 0;
-        $regex  = new RegexNamedGroupsIterator($pattern, $content);
+        $regex  = new RegexNamedGroupsIterator($this->pattern, $file->getContents());
 
         $iterator = $regex->getIterator();
 
@@ -96,22 +75,22 @@ class NativeStateful implements Stateful
         $body = $iterator->current()[0];
         $iterator->next();
 
-        $body .= $this->collapse($iterator, Unknown::T_NAME);
+        $body .= $this->reduce($iterator, Unknown::T_NAME);
 
         return new Unknown($body, $offset);
     }
 
     /**
      * @param \Traversable|\Iterator $iterator
-     * @param string $token
+     * @param string $key
      * @return string
      */
-    private function collapse(\Traversable $iterator, string $token): string
+    protected function reduce(\Traversable $iterator, string $key): string
     {
         $body = '';
 
         while ($iterator->valid()) {
-            if ($iterator->key() !== $token) {
+            if ($iterator->key() !== $key) {
                 break;
             }
 
