@@ -114,3 +114,14 @@ echo $compiler->compile(); // "/\G(?P<T_WHITESPACE>\s+)|(?P<T_DIGIT>\d+)|(?P<T_U
 - 16Gb DDR4
 
 [![./resources/public/tps.png](./resources/public/tps.png)](./resources/public/tps.png)
+
+**Legend:**
+
+- Y Axis: Number of tokens processed per second.
+- X Axis: Number of tokens in one source code (in one sample) being processed.
+
+- Red: The Railt **NativeStateless** lexer version 1.2
+- Blue: The Railt **NativeStateful** lexer version 1.2
+- Yellow: The Railt **ParleStateless** lexer version 1.2 (lexertl extension version 0.8.1)
+- Green: The original **hoa/compiler** lexer version 3.17.08.08
+
