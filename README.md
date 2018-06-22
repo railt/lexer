@@ -104,3 +104,13 @@ $compiler->add('T_DIGIT', '\d+');
 
 echo $compiler->compile(); // "/\G(?P<T_WHITESPACE>\s+)|(?P<T_DIGIT>\d+)|(?P<T_UNKNOWN>.*?)/usS"
 ```
+
+## Benchmarks
+
+- PHP 7.1 (x64 NTS)
+    - XDebug: **disabled**
+    - Opcache: **disabled**
+- Intel i7 6700k
+- 16Gb DDR4
+
+[![./resources/public/tps.png](./resources/public/tps.png)](./resources/public/tps.png)
