@@ -111,10 +111,6 @@ class NativeStateful extends Lexer implements Stateful
     {
         [$name, $context] = [$iterator->key(), $iterator->current()];
 
-        if (\count($context) > 1) {
-            $context = \array_slice($context, 1);
-        }
-
         $iterator->next();
 
         return new Token($name, $context, $offset);

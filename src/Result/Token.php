@@ -60,6 +60,14 @@ class Token extends BaseToken
     }
 
     /**
+     * @return iterable|string[]
+     */
+    public function groups(): iterable
+    {
+        return $this->value;
+    }
+
+    /**
      * @return int
      */
     public function offset(): int

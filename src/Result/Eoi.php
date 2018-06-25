@@ -59,6 +59,14 @@ final class Eoi extends BaseToken
     }
 
     /**
+     * @return iterable|string[]
+     */
+    public function groups(): iterable
+    {
+        return [$this->value()];
+    }
+
+    /**
      * @return int
      */
     public function bytes(): int

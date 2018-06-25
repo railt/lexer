@@ -37,6 +37,13 @@ interface TokenInterface
     public function value(int $group = 0): ?string;
 
     /**
+     * Returns the list of the captured subgroups.
+     *
+     * @return iterable
+     */
+    public function groups(): iterable;
+
+    /**
      * The token value size in bytes.
      *
      * @return int
