@@ -41,6 +41,8 @@ class NativeStateful extends Lexer implements Stateful
     /**
      * @param Readable $file
      * @return \Traversable
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     protected function exec(Readable $file): \Traversable
     {
@@ -108,6 +110,10 @@ class NativeStateful extends Lexer implements Stateful
     private function token(\Traversable $iterator, int $offset): TokenInterface
     {
         [$name, $context] = [$iterator->key(), $iterator->current()];
+
+        if (\count($context) > 1) {
+            \array_splice($context, 1);
+        }
 
         $iterator->next();
 

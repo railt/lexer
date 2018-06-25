@@ -28,6 +28,7 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testDigits(LexerInterface $lexer): void
     {
@@ -39,6 +40,7 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testDigitsWithEoi(LexerInterface $lexer): void
     {
@@ -50,6 +52,7 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testUnknownLookahead(LexerInterface $lexer): void
     {
@@ -71,6 +74,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessAddToken(LexerInterface $lexer): void
     {
@@ -104,6 +109,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessLexWithAddedToken(LexerInterface $lexer): void
     {
@@ -120,6 +127,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessAddSkippedToken(LexerInterface $lexer): void
     {
@@ -144,6 +153,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessLexWithSkippedToken(LexerInterface $lexer): void
     {
@@ -160,6 +171,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessCheckAddedToken(LexerInterface $lexer): void
     {
@@ -179,6 +192,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessCheckAddedSkippedToken(LexerInterface $lexer): void
     {
@@ -198,6 +213,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessCheckSkipWhenNotSkipToken(LexerInterface $lexer): void
     {
@@ -215,6 +232,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessCheckSkipToken(LexerInterface $lexer): void
     {
