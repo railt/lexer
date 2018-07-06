@@ -31,23 +31,35 @@ it was decided to abandon the immutable stateful lexers.
 interface LexerInterface
 {
     public function __construct(array $tokens = [], array $skip = []);
+    
     public function lex(Readable $input): \Traversable;
+    
     public function add(string $token, string $pcre): LexerInterface;
+    
     public function skip(string $name): LexerInterface;
 }
+```
 
+```php
 interface MultistateLexerInterface extends LexerInterface
 {
     public function state(string $token, int $state, int $nextState = null): MultistateLexerInterface;
 }
+```
 
+```php
 interface TokenInterface
 {
     public function getName(): string;
+    
     public function getOffset(): int;
+    
     public function getValue(int $group = 0): ?string;
+    
     public function getGroups(): iterable;
+    
     public function getBytes(): int;
+    
     public function getLength(): int;
 }
 ```
