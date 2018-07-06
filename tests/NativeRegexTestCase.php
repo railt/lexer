@@ -10,8 +10,6 @@ declare(strict_types=1);
 namespace Railt\Tests\Lexer;
 
 use Railt\Lexer\Driver\NativeRegex;
-use Railt\Lexer\Driver\NativeStateful\Pattern;
-use Railt\Lexer\Driver\NativeStateful\PCRECompiler;
 
 /**
  * Class NativeCompilerTestCase
