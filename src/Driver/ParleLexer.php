@@ -14,27 +14,21 @@ use Parle\LexerException;
 use Parle\Token as InternalToken;
 use Railt\Io\Readable;
 use Railt\Lexer\Exception\BadLexemeException;
-use Railt\Lexer\Exception\UnsupportedLexerRuntimeException;
+use Railt\Lexer\LexerInterface;
 use Railt\Lexer\Result\Eoi;
 use Railt\Lexer\Result\Token;
 use Railt\Lexer\Result\Unknown;
-use Railt\Lexer\Stateless;
 use Railt\Lexer\TokenInterface;
 
 /**
  * Class ParleStateless
  */
-class ParleStateless extends Lexer implements Stateless
+class ParleLexer extends Lexer
 {
     /**
      * @var array|string[]
      */
     private $map = [];
-
-    /**
-     * @var array|string[]
-     */
-    private $tokens = [];
 
     /**
      * @var int
@@ -47,26 +41,30 @@ class ParleStateless extends Lexer implements Stateless
     private $lexer;
 
     /**
-     * Parle constructor.
-     * @throws UnsupportedLexerRuntimeException
+     * ParleStateless constructor.
+     * @param array $tokens
+     * @param array $skip
+     * @throws BadLexemeException
      */
-    public function __construct()
+    public function __construct(array $tokens = [], array $skip = [])
     {
-        if (! \class_exists(Parle::class)) {
-            throw new UnsupportedLexerRuntimeException('This runtime required parle extension');
-        }
+        \assert(\class_exists(Parle::class, false));
 
         $this->lexer = new Parle();
+        $this->skipped = $skip;
+
+        foreach ($tokens as $name => $pcre) {
+            $this->add($name, $pcre);
+        }
     }
 
     /**
      * @param string $name
      * @param string $pcre
-     * @param bool $skip
-     * @return Stateless
-     * @throws \Railt\Lexer\Exception\BadLexemeException
+     * @return LexerInterface
+     * @throws BadLexemeException
      */
-    public function add(string $name, string $pcre, bool $skip = false): Stateless
+    public function add(string $name, string $pcre): LexerInterface
     {
         try {
             $this->lexer->push($pcre, $this->id);
@@ -79,23 +77,9 @@ class ParleStateless extends Lexer implements Stateless
             throw new BadLexemeException($message);
         }
 
-        if ($skip) {
-            $this->skip[] = $name;
-        }
-
         ++$this->id;
 
         return $this;
-    }
-
-    /**
-     * @return iterable
-     */
-    public function getDefinedTokens(): iterable
-    {
-        foreach ($this->tokens as $id => $pcre) {
-            yield $this->map[$id] => $pcre;
-        }
     }
 
     /**
@@ -117,20 +101,6 @@ class ParleStateless extends Lexer implements Stateless
         }
 
         yield new Eoi($this->lexer->marker);
-    }
-
-    /**
-     * @param \Traversable|\Iterator $iterator
-     * @return Token
-     */
-    private function token(\Traversable $iterator): TokenInterface
-    {
-        /** @var InternalToken $current */
-        $current = $iterator->current();
-
-        $iterator->next();
-
-        return new Token($this->map[$current->id], $current->value, $this->lexer->marker);
     }
 
     /**
@@ -174,11 +144,16 @@ class ParleStateless extends Lexer implements Stateless
     }
 
     /**
-     * @param string $name
-     * @return bool
+     * @param \Traversable|\Iterator $iterator
+     * @return Token
      */
-    public function has(string $name): bool
+    private function token(\Traversable $iterator): TokenInterface
     {
-        return \in_array($name, $this->map, true);
+        /** @var InternalToken $current */
+        $current = $iterator->current();
+
+        $iterator->next();
+
+        return new Token($this->map[$current->id], $current->value, $this->lexer->marker);
     }
 }

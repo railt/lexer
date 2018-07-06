@@ -90,12 +90,16 @@ class RegexIterator implements \IteratorAggregate
         switch ($code) {
             case \PREG_INTERNAL_ERROR:
                 return self::PREG_INTERNAL_ERROR;
+
             case \PREG_BACKTRACK_LIMIT_ERROR:
                 return self::PREG_BACKTRACK_LIMIT_ERROR;
+
             case \PREG_RECURSION_LIMIT_ERROR:
                 return self::PREG_RECURSION_LIMIT_ERROR;
+
             case \PREG_BAD_UTF8_ERROR:
                 return self::PREG_BAD_UTF8_ERROR;
+
             case \PREG_BAD_UTF8_OFFSET_ERROR:
                 return self::PREG_BAD_UTF8_OFFSET_ERROR;
         }

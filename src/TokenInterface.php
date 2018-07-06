@@ -19,14 +19,14 @@ interface TokenInterface
      *
      * @return string
      */
-    public function name(): string;
+    public function getName(): string;
 
     /**
      * Token position in bytes.
      *
      * @return int
      */
-    public function offset(): int;
+    public function getOffset(): int;
 
     /**
      * Returns the value of the captured subgroup.
@@ -34,19 +34,26 @@ interface TokenInterface
      * @param int $group Number of subgroup
      * @return string|null If the group is not found, the null will return.
      */
-    public function value(int $group = 0): ?string;
+    public function getValue(int $group = 0): ?string;
+
+    /**
+     * Returns the list of the captured subgroups.
+     *
+     * @return iterable
+     */
+    public function getGroups(): iterable;
 
     /**
      * The token value size in bytes.
      *
      * @return int
      */
-    public function bytes(): int;
+    public function getBytes(): int;
 
     /**
      * The token value size in chars (multibyte encodings contain several bytes).
      *
      * @return int
      */
-    public function length(): int;
+    public function getLength(): int;
 }

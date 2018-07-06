@@ -11,10 +11,8 @@ namespace Railt\Tests\Lexer;
 
 use Railt\Io\File;
 use Railt\Io\Readable;
-use Railt\Lexer\Driver\Common\PCRECompiler;
-use Railt\Lexer\Driver\NativeStateful;
-use Railt\Lexer\Driver\NativeStateless;
-use Railt\Lexer\Driver\ParleStateless;
+use Railt\Lexer\Driver\NativeRegex;
+use Railt\Lexer\Driver\ParleLexer;
 use Railt\Lexer\LexerInterface;
 
 /**
@@ -56,6 +54,7 @@ class BenchTestCase extends BaseTestCase
 
     /**
      * @return array
+     * @throws \Railt\Io\Exception\NotReadableException
      */
     public function benchesProvider(): array
     {
@@ -70,11 +69,13 @@ class BenchTestCase extends BaseTestCase
      * @dataProvider benchesProvider
      * @param int $samples
      * @param Readable $sources
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \Railt\Lexer\Exception\BadLexemeException
      */
     public function testParleLexer(int $samples, Readable $sources): void
     {
         $tokens = require __DIR__ . '/resources/graphql.lex.php';
-        $lexer  = new ParleStateless();
+        $lexer  = new ParleLexer();
 
         foreach ($tokens as $token => $pcre) {
             $lexer->add($token, $pcre);
@@ -87,33 +88,13 @@ class BenchTestCase extends BaseTestCase
      * @dataProvider benchesProvider
      * @param int $samples
      * @param Readable $sources
+     * @throws \PHPUnit\Framework\AssertionFailedError
      */
-    public function testNativeStatefulLexer(int $samples, Readable $sources): void
+    public function testNativeRegexLexer(int $samples, Readable $sources): void
     {
         $tokens   = require __DIR__ . '/resources/graphql.lex.php';
-        $compiler = new PCRECompiler();
 
-        foreach ($tokens as $token => $pcre) {
-            $compiler->add($token, $pcre);
-        }
-        $lexer = new NativeStateful($compiler->compile(), []);
-
-        $this->execute($lexer, $samples, $sources);
-    }
-
-    /**
-     * @dataProvider benchesProvider
-     * @param int $samples
-     * @param Readable $sources
-     */
-    public function testNativeStatelessLexer(int $samples, Readable $sources): void
-    {
-        $tokens = require __DIR__ . '/resources/graphql.lex.php';
-        $lexer  = new NativeStateless();
-
-        foreach ($tokens as $token => $pcre) {
-            $lexer->add($token, $pcre);
-        }
+        $lexer = new NativeRegex($tokens);
 
         $this->execute($lexer, $samples, $sources);
     }
@@ -122,6 +103,7 @@ class BenchTestCase extends BaseTestCase
      * @param int $samples
      * @param LexerInterface $lexer
      * @param Readable $sources
+     * @throws \PHPUnit\Framework\AssertionFailedError
      */
     private function execute(LexerInterface $lexer, int $samples, Readable $sources): void
     {

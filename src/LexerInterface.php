@@ -17,11 +17,34 @@ use Railt\Io\Readable;
 interface LexerInterface
 {
     /**
+     * LexerInterface constructor.
+     * @param array $tokens
+     * @param array $skip
+     */
+    public function __construct(array $tokens = [], array $skip = []);
+
+    /**
      * Compiling the current state of the lexer and returning stream tokens from the source file
      *
      * @param Readable $input
-     * @param bool $eoi
-     * @return \Traversable|TokenInterface[]|\Traversable
+     * @return \Traversable|TokenInterface[]
      */
-    public function lex(Readable $input, bool $eoi = false): \Traversable;
+    public function lex(Readable $input): \Traversable;
+
+    /**
+     * Add a lexer rule
+     *
+     * @param string $token Token name
+     * @param string $pcre Perl compatible regular expression used for token matching
+     * @return LexerInterface|$this
+     */
+    public function add(string $token, string $pcre): LexerInterface;
+
+    /**
+     * A method for marking a token as skipped.
+     *
+     * @param string $name Token name
+     * @return LexerInterface
+     */
+    public function skip(string $name): LexerInterface;
 }

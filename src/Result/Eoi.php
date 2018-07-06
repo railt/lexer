@@ -36,7 +36,7 @@ final class Eoi extends BaseToken
     /**
      * @return int
      */
-    public function offset(): int
+    public function getOffset(): int
     {
         return $this->offset;
     }
@@ -44,7 +44,7 @@ final class Eoi extends BaseToken
     /**
      * @return string
      */
-    public function name(): string
+    public function getName(): string
     {
         return static::T_NAME;
     }
@@ -53,15 +53,23 @@ final class Eoi extends BaseToken
      * @param int|null $offset
      * @return string
      */
-    public function value(int $offset = null): string
+    public function getValue(int $offset = null): string
     {
         return "\0";
     }
 
     /**
+     * @return iterable|string[]
+     */
+    public function getGroups(): iterable
+    {
+        return [$this->getValue()];
+    }
+
+    /**
      * @return int
      */
-    public function bytes(): int
+    public function getBytes(): int
     {
         return 0;
     }
@@ -69,7 +77,7 @@ final class Eoi extends BaseToken
     /**
      * @return int
      */
-    public function length(): int
+    public function getLength(): int
     {
         return 0;
     }

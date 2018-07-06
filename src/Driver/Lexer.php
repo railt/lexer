@@ -11,7 +11,6 @@ namespace Railt\Lexer\Driver;
 
 use Railt\Io\Readable;
 use Railt\Lexer\LexerInterface;
-use Railt\Lexer\Result\Eoi;
 use Railt\Lexer\TokenInterface;
 
 /**
@@ -20,50 +19,54 @@ use Railt\Lexer\TokenInterface;
 abstract class Lexer implements LexerInterface
 {
     /**
-     * @var array
+     * @var array|string[]
      */
-    protected $skip = [];
+    protected $skipped = [];
 
     /**
-     * @param TokenInterface $token
-     * @param bool $eoi
-     * @return bool
+     * @var array|string[]
      */
-    protected function shouldKeep(TokenInterface $token, bool $eoi): bool
-    {
-        $isSkipped = \in_array($token->name(), $this->skip, true);
-
-        $allowsEoi = ($token instanceof Eoi && $eoi) || ! ($token instanceof Eoi);
-
-        return ! $isSkipped && $allowsEoi;
-    }
+    protected $tokens = [];
 
     /**
      * @param Readable $input
-     * @param bool $eoi
      * @return \Traversable|TokenInterface[]
      */
-    public function lex(Readable $input, bool $eoi = false): \Traversable
+    public function lex(Readable $input): \Traversable
     {
         foreach ($this->exec($input) as $token) {
-            if ($this->shouldKeep($token, $eoi)) {
+            if (! \in_array($token->getName(), $this->skipped, true)) {
                 yield $token;
             }
         }
     }
 
     /**
-     * @param string $name
-     * @return bool
+     * @param string $token
+     * @param string $pcre
+     * @return LexerInterface
      */
-    public function isSkipped(string $name): bool
+    public function add(string $token, string $pcre): LexerInterface
     {
-        return \in_array($name, $this->skip, true);
+        $this->tokens[$token] = $pcre;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @return LexerInterface
+     */
+    public function skip(string $name): LexerInterface
+    {
+        $this->skipped[] = $name;
+
+        return $this;
     }
 
     /**
      * @param Readable $file
-     * @return \Traversable|TokenInterface
+     * @return \Traversable|TokenInterface[]
      */
     abstract protected function exec(Readable $file): \Traversable;
 }

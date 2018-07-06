@@ -17,13 +17,9 @@ return [
     'T_TRUE'                => 'true\\b',
     'T_FALSE'               => 'false\\b',
     'T_NULL'                => 'null\\b',
-    // Lexrtl bad lexeme
-    // 'T_BLOCK_STRING'        => '"""(?:\\\\"""|(?!""").|\\s)+"""',
-    // Lexrtl bad lexeme
-    //'T_STRING'              => '"[^"\\\\]+(\\\\.[^"\\\\]*)*"',
+    'T_BLOCK_STRING'        => '"""(.+?)"""',
+    'T_STRING'              => '"(.+?)"',
     'T_NAMESPACE'           => 'namespace\\b',
-    // Lexrtl bad lexeme (lookahead)
-    //'T_NAMESPACE_SEPARATOR' => '/',
     'T_EXTENDS'             => 'extends\\b',
     'T_IMPLEMENTS'          => 'implements\\b',
     'T_ON'                  => 'on\\b',

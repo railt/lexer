@@ -9,23 +9,22 @@ declare(strict_types=1);
 
 namespace Railt\Tests\Lexer;
 
-use Railt\Lexer\Driver\NativeStateless;
+use Railt\Lexer\Driver\NativeRegex;
+use Railt\Lexer\Driver\NativeStateful\Pattern;
+use Railt\Lexer\Driver\NativeStateful\PCRECompiler;
 
 /**
  * Class NativeCompilerTestCase
  */
-class NativeStatelessTestCase extends LexerTestCase
+class NativeRegexTestCase extends LexerTestCase
 {
     /**
      * @return array
      */
     public function provider(): array
     {
-        $lexer = new NativeStateless();
-
-        $lexer->add('T_WHITESPACE', '\s+', true);
-        $lexer->add('T_DIGIT', '\d+');
-
-        return [[$lexer]];
+        return [
+            [new NativeRegex(['T_WHITESPACE' => '\s+', 'T_DIGIT' => '\d+'], ['T_WHITESPACE'])],
+        ];
     }
 }

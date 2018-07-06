@@ -13,7 +13,6 @@ use Railt\Io\File;
 use Railt\Lexer\LexerInterface;
 use Railt\Lexer\Result\Eoi;
 use Railt\Lexer\Result\Unknown;
-use Railt\Lexer\Stateless;
 
 /**
  * Class LexerCompiler
@@ -28,68 +27,55 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testDigits(LexerInterface $lexer): void
     {
         $result = \iterator_to_array($lexer->lex(File::fromSources('23 42')));
 
-        $this->assertCount(2, $result);
-    }
-
-    /**
-     * @dataProvider provider
-     * @param LexerInterface $lexer
-     */
-    public function testDigitsWithEoi(LexerInterface $lexer): void
-    {
-        $result = \iterator_to_array($lexer->lex(File::fromSources('23 42'), true));
-
         $this->assertCount(3, $result);
+        $this->assertEquals('T_DIGIT', $result[0]->getName());
+        $this->assertEquals('T_DIGIT', $result[1]->getName());
+        $this->assertEquals(Eoi::T_NAME, $result[2]->getName());
     }
 
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
+     */
+    public function testDigitsWithSkipped(LexerInterface $lexer): void
+    {
+        $lexer = clone $lexer;
+        $lexer->skip(Eoi::T_NAME);
+        $result = \iterator_to_array($lexer->lex(File::fromSources('23 42')));
+
+        $this->assertCount(2, $result);
+        $this->assertEquals('T_DIGIT', $result[0]->getName());
+        $this->assertEquals('T_DIGIT', $result[1]->getName());
+    }
+
+    /**
+     * @dataProvider provider
+     * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
      */
     public function testUnknownLookahead(LexerInterface $lexer): void
     {
         $file   = File::fromSources("23 \nunknown \n42");
         $result = \iterator_to_array($lexer->lex($file));
 
-        $this->assertCount(3, $result);
-        $this->assertSame('T_DIGIT', $result[0]->name());
-        $this->assertSame('T_UNKNOWN', $result[1]->name());
-        $this->assertSame('T_DIGIT', $result[2]->name());
+        $this->assertCount(4, $result);
+        $this->assertSame('T_DIGIT', $result[0]->getName());
+        $this->assertSame('T_UNKNOWN', $result[1]->getName());
+        $this->assertSame('T_DIGIT', $result[2]->getName());
+        $this->assertSame(Eoi::T_NAME, $result[3]->getName());
 
         /** @var Unknown $unknown */
         $unknown = $result[1];
 
-        $this->assertSame(4, $unknown->offset(), 'Bad Offset');
-        $this->assertSame(7, $unknown->length(), 'Bad Length');
-    }
-
-    /**
-     * @dataProvider provider
-     * @param LexerInterface $lexer
-     */
-    public function testStatelessAddToken(LexerInterface $lexer): void
-    {
-        if (! ($lexer instanceof Stateless)) {
-            $this->markTestSkipped('This test is only available for stateless lexers');
-        }
-
-        $before = $this->toArray($lexer->getDefinedTokens());
-        $this->assertCount(2, $before);
-        $this->assertArrayHasKey('T_DIGIT', $before);
-        $this->assertArrayHasKey('T_WHITESPACE', $before);
-
-        $lexer->add('T_WORD', '\w+');
-
-        $after = $this->toArray($lexer->getDefinedTokens());
-        $this->assertCount(3, $after);
-        $this->assertArrayHasKey('T_DIGIT', $after);
-        $this->assertArrayHasKey('T_WHITESPACE', $after);
-        $this->assertArrayHasKey('T_WORD', $after);
+        $this->assertSame(4, $unknown->getOffset(), 'Bad Offset');
+        $this->assertSame(7, $unknown->getLength(), 'Bad Length');
     }
 
     /**
@@ -104,6 +90,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessLexWithAddedToken(LexerInterface $lexer): void
     {
@@ -112,38 +100,16 @@ abstract class LexerTestCase extends BaseTestCase
         }
 
         $lexer->add('T_WORD', '\w+');
-        $result = \iterator_to_array($lexer->lex(File::fromSources('23 42 word word')));
+        $result = \iterator_to_array($lexer->lex(File::fromSources('23 42 word word'), ['T_WHITESPACE', Eoi::T_NAME]));
 
         $this->assertCount(4, $result);
     }
 
     /**
      * @dataProvider provider
-     * @param LexerInterface $lexer
-     */
-    public function testStatelessAddSkippedToken(LexerInterface $lexer): void
-    {
-        if (! ($lexer instanceof Stateless)) {
-            $this->markTestSkipped('This test is only available for stateless lexers');
-        }
-
-        $before = $this->toArray($lexer->getDefinedTokens());
-        $this->assertCount(2, $before);
-        $this->assertArrayHasKey('T_DIGIT', $before);
-        $this->assertArrayHasKey('T_WHITESPACE', $before);
-
-        $lexer->add('T_WORD', '\w+', true);
-
-        $after = $this->toArray($lexer->getDefinedTokens());
-        $this->assertCount(3, $after);
-        $this->assertArrayHasKey('T_DIGIT', $after);
-        $this->assertArrayHasKey('T_WHITESPACE', $after);
-        $this->assertArrayHasKey('T_WORD', $after);
-    }
-
-    /**
-     * @dataProvider provider
-     * @param LexerInterface $lexer
+     * @param LexerInterface|Stateless $lexer
+     * @throws \PHPUnit\Framework\Exception
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessLexWithSkippedToken(LexerInterface $lexer): void
     {
@@ -151,15 +117,17 @@ abstract class LexerTestCase extends BaseTestCase
             $this->markTestSkipped('This test is only available for stateless lexers');
         }
 
-        $lexer->add('T_WORD', '\w+', true);
-        $result = \iterator_to_array($lexer->lex(File::fromSources('23 word word 42')));
+        $lexer->add('T_WORD', '\w+');
+        $result = \iterator_to_array($lexer->lex(File::fromSources('23 word word 42'), ['T_WHITESPACE', Eoi::T_NAME]));
 
-        $this->assertCount(2, $result);
+        $this->assertCount(4, $result);
     }
 
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessCheckAddedToken(LexerInterface $lexer): void
     {
@@ -179,6 +147,8 @@ abstract class LexerTestCase extends BaseTestCase
     /**
      * @dataProvider provider
      * @param LexerInterface $lexer
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     * @throws \PHPUnit\Framework\SkippedTestError
      */
     public function testStatelessCheckAddedSkippedToken(LexerInterface $lexer): void
     {
@@ -186,46 +156,12 @@ abstract class LexerTestCase extends BaseTestCase
             $this->markTestSkipped('This test is only available for stateless lexers');
         }
 
-        $lexer->add('T_WORD', '\w+', true);
+        $lexer->add('T_WORD', '\w+');
 
         $this->assertTrue($lexer->has('T_DIGIT'));
         $this->assertTrue($lexer->has('T_WHITESPACE'));
         $this->assertTrue($lexer->has('T_WORD'));
         $this->assertFalse($lexer->has(Unknown::T_NAME));
         $this->assertFalse($lexer->has(Eoi::T_NAME));
-    }
-
-    /**
-     * @dataProvider provider
-     * @param LexerInterface $lexer
-     */
-    public function testStatelessCheckSkipWhenNotSkipToken(LexerInterface $lexer): void
-    {
-        if (! ($lexer instanceof Stateless)) {
-            $this->markTestSkipped('This test is only available for stateless lexers');
-        }
-
-        $lexer->add('T_WORD', '\w+');
-
-        $this->assertTrue($lexer->isSkipped('T_WHITESPACE'));
-        $this->assertFalse($lexer->isSkipped('T_DIGIT'));
-        $this->assertFalse($lexer->isSkipped('T_WORD'));
-    }
-
-    /**
-     * @dataProvider provider
-     * @param LexerInterface $lexer
-     */
-    public function testStatelessCheckSkipToken(LexerInterface $lexer): void
-    {
-        if (! ($lexer instanceof Stateless)) {
-            $this->markTestSkipped('This test is only available for stateless lexers');
-        }
-
-        $lexer->add('T_WORD', '\w+', true);
-
-        $this->assertTrue($lexer->isSkipped('T_WHITESPACE'));
-        $this->assertFalse($lexer->isSkipped('T_DIGIT'));
-        $this->assertTrue($lexer->isSkipped('T_WORD'));
     }
 }

@@ -45,7 +45,7 @@ class Token extends BaseToken
     /**
      * @return string
      */
-    public function name(): string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -54,15 +54,23 @@ class Token extends BaseToken
      * @param int|null $offset
      * @return string|null
      */
-    public function value(int $offset = 0): ?string
+    public function getValue(int $offset = 0): ?string
     {
         return $this->value[$offset] ?? null;
     }
 
     /**
+     * @return iterable|string[]
+     */
+    public function getGroups(): iterable
+    {
+        return $this->value;
+    }
+
+    /**
      * @return int
      */
-    public function offset(): int
+    public function getOffset(): int
     {
         return $this->offset;
     }

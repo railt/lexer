@@ -10,32 +10,27 @@ declare(strict_types=1);
 namespace Railt\Lexer\Driver;
 
 use Railt\Io\Readable;
+use Railt\Lexer\Driver\NativeStateful\PCRECompiler;
 use Railt\Lexer\Iterator\RegexNamedGroupsIterator;
 use Railt\Lexer\Result\Eoi;
 use Railt\Lexer\Result\Token;
 use Railt\Lexer\Result\Unknown;
-use Railt\Lexer\Stateful;
 use Railt\Lexer\TokenInterface;
 
 /**
- * Class NativeStateful
+ * Class NativeRegex
  */
-class NativeStateful extends Lexer implements Stateful
+class NativeRegex extends Lexer
 {
     /**
-     * @var string
+     * NativeRegex constructor.
+     * @param array $tokens
+     * @param array $skip
      */
-    protected $pattern;
-
-    /**
-     * NativeStateful constructor.
-     * @param string $pattern
-     * @param array $skipped
-     */
-    public function __construct(string $pattern, array $skipped = [])
+    public function __construct(array $tokens = [], array $skip = [])
     {
-        $this->pattern = $pattern;
-        $this->skip    = $skipped;
+        $this->tokens  = $tokens;
+        $this->skipped = $skip;
     }
 
     /**
@@ -47,7 +42,7 @@ class NativeStateful extends Lexer implements Stateful
     protected function exec(Readable $file): \Traversable
     {
         $offset = 0;
-        $regex  = new RegexNamedGroupsIterator($this->pattern, $file->getContents());
+        $regex  = new RegexNamedGroupsIterator($this->getPattern(), $file->getContents());
 
         $iterator = $regex->getIterator();
 
@@ -57,12 +52,20 @@ class NativeStateful extends Lexer implements Stateful
                 ? $this->unknown($iterator, $offset)
                 : $this->token($iterator, $offset);
 
-            $offset += $token->bytes();
+            $offset += $token->getBytes();
 
             yield $token;
         }
 
         yield new Eoi($offset);
+    }
+
+    /**
+     * @return string
+     */
+    private function getPattern(): string
+    {
+        return (new PCRECompiler($this->tokens))->compile();
     }
 
     /**

@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Railt\Tests\Lexer;
 
-use Railt\Lexer\Driver\ParleStateless;
+use Railt\Lexer\Driver\ParleLexer;
 
 /**
  * Class ParleTestCase
@@ -18,14 +18,12 @@ class ParleTestCase extends LexerTestCase
 {
     /**
      * @return array
+     * @throws \Railt\Lexer\Exception\BadLexemeException
      */
     public function provider(): array
     {
-        $lexer = new ParleStateless();
-
-        $lexer->add('T_WHITESPACE', '\s+', true);
-        $lexer->add('T_DIGIT', '\d+');
-
-        return [[$lexer]];
+        return [
+            [new ParleLexer(['T_WHITESPACE' => '\s+', 'T_DIGIT' => '\d+'], ['T_WHITESPACE'])],
+        ];
     }
 }

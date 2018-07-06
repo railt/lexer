@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Railt\Lexer\Result;
 
+use Railt\Lexer\Result\Common\Renderable;
 use Railt\Lexer\TokenInterface;
 
 /**
@@ -16,6 +17,8 @@ use Railt\Lexer\TokenInterface;
  */
 abstract class BaseToken implements TokenInterface
 {
+    use Renderable;
+
     /**
      * @var int|null
      */
@@ -27,32 +30,12 @@ abstract class BaseToken implements TokenInterface
     private $bytes;
 
     /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        $format = function (string $value) {
-            $value = (string)(\preg_replace('/\s+/iu', ' ', $value) ?? $value);
-            $value = \addcslashes($value, '"');
-
-            if (\mb_strlen($value) > 35) {
-                $value = \mb_substr($value, 0, 30) .
-                    \sprintf('… (%s+)', \mb_strlen($value) - 30);
-            }
-
-            return $value;
-        };
-
-        return \sprintf('"%s" (%s)', $format($this->value()), $this->name());
-    }
-
-    /**
      * @return int
      */
-    public function bytes(): int
+    public function getBytes(): int
     {
         if ($this->bytes === null) {
-            $this->bytes = \strlen($this->value());
+            $this->bytes = \strlen($this->getValue());
         }
 
         return $this->bytes;
@@ -61,10 +44,10 @@ abstract class BaseToken implements TokenInterface
     /**
      * @return int
      */
-    public function length(): int
+    public function getLength(): int
     {
         if ($this->length === null) {
-            $this->length = \mb_strlen($this->value());
+            $this->length = \mb_strlen($this->getValue());
         }
 
         return $this->length;
