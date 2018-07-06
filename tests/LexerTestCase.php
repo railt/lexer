@@ -34,9 +34,9 @@ abstract class LexerTestCase extends BaseTestCase
         $result = \iterator_to_array($lexer->lex(File::fromSources('23 42')));
 
         $this->assertCount(3, $result);
-        $this->assertEquals('T_DIGIT', $result[0]->getName());
-        $this->assertEquals('T_DIGIT', $result[1]->getName());
-        $this->assertEquals(Eoi::T_NAME, $result[2]->getName());
+        $this->assertSame('T_DIGIT', $result[0]->getName());
+        $this->assertSame('T_DIGIT', $result[1]->getName());
+        $this->assertSame(Eoi::T_NAME, $result[2]->getName());
     }
 
     /**
@@ -51,8 +51,8 @@ abstract class LexerTestCase extends BaseTestCase
         $result = \iterator_to_array($lexer->lex(File::fromSources('23 42')));
 
         $this->assertCount(2, $result);
-        $this->assertEquals('T_DIGIT', $result[0]->getName());
-        $this->assertEquals('T_DIGIT', $result[1]->getName());
+        $this->assertSame('T_DIGIT', $result[0]->getName());
+        $this->assertSame('T_DIGIT', $result[1]->getName());
     }
 
     /**

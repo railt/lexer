@@ -50,7 +50,7 @@ class ParleLexer extends Lexer
     {
         \assert(\class_exists(Parle::class, false));
 
-        $this->lexer = new Parle();
+        $this->lexer   = new Parle();
         $this->skipped = $skip;
 
         foreach ($tokens as $name => $pcre) {

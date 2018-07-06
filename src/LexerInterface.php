@@ -38,7 +38,7 @@ interface LexerInterface
      * @param string $pcre Perl compatible regular expression used for token matching
      * @return LexerInterface|$this
      */
-    public function add(string $token, string $pcre): LexerInterface;
+    public function add(string $token, string $pcre): self;
 
     /**
      * A method for marking a token as skipped.
@@ -46,5 +46,5 @@ interface LexerInterface
      * @param string $name Token name
      * @return LexerInterface
      */
-    public function skip(string $name): LexerInterface;
+    public function skip(string $name): self;
 }
