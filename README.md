@@ -30,68 +30,25 @@ it was decided to abandon the immutable stateful lexers.
 ```php
 interface LexerInterface
 {
-    /**
-     * LexerInterface constructor.
-     */
     public function __construct(array $tokens = [], array $skip = []);
-
-    /**
-     * Compiling the current state of the lexer and returning stream tokens from the source file.
-     *
-     * @param Readable $input
-     * @return \Traversable|TokenInterface[]
-     */
     public function lex(Readable $input): \Traversable;
-
-    /**
-     * Add a lexer rule.
-     *
-     * @param string $token Token name
-     * @param string $pcre Perl compatible regular expression used for token matching
-     * @return LexerInterface|$this
-     */
     public function add(string $token, string $pcre): LexerInterface;
-
-    /**
-     * A method for marking a token as skipped. 
-     *
-     * @param string $name Token name
-     * @return LexerInterface
-     */
     public function skip(string $name): LexerInterface;
 }
-```
 
-```php
 interface MultistateLexerInterface extends LexerInterface
 {
-    /**
-     * Method for indicating the status identifier of the indicated token.
-     *
-     * For example, in this case, the T_STRING token will only
-     * occur when the lexer is in state 1:
-     *
-     * <code>
-     *  $lexer->add('T_QUOTE_OPEN', '"');
-     *  $lexer->add('T_QUOTE_CLOSE', '"');
-     *  $lexer->add('T_STRING', '[^\\"]');
-     *
-     *  $lexer->state('T_QUOTE_OPEN', 0, 1);
-     *  $lexer->state('T_STRING', 1);
-     *  $lexer->state('T_QUOTE_CLOSE', 1, 0);
-     *
-     *  $lexer->lex('"Hello!"');
-     *  // T_QUOTE_OPEN (state 0 -> 1)
-     *  // T_QUOTE_OPEN (state 1 -> 1)
-     *  // T_QUOTE_CLOSE (state 1 -> 0)
-     * </code>
-     *
-     * @param string $token Token name
-     * @param int $state State identifier
-     * @param int|null $nextState
-     * @return MultistateLexerInterface
-     */
     public function state(string $token, int $state, int $nextState = null): MultistateLexerInterface;
+}
+
+interface TokenInterface
+{
+    public function getName(): string;
+    public function getOffset(): int;
+    public function getValue(int $group = 0): ?string;
+    public function getGroups(): iterable;
+    public function getBytes(): int;
+    public function getLength(): int;
 }
 ```
 
@@ -114,7 +71,7 @@ $lexer = new NativeRegex([
 ]);
 
 foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
-    echo $token->name() . ' -> ' . $token->value() . ' at ' . $token->offset() . "\n";
+    echo $token->getName() . ' -> ' . $token->getValue() . ' at ' . $token->getOffset() . "\n";
 }
 
 // Outputs:
@@ -141,7 +98,7 @@ $lexer = new ParleLexer([
 ]);
 
 foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
-    echo $token->name() . ' -> ' . $token->value() . ' at ' . $token->offset() . "\n";
+    echo $token->getName() . ' -> ' . $token->getValue() . ' at ' . $token->getOffset() . "\n";
 }
 
 // Outputs:

@@ -44,13 +44,6 @@ interface TokenInterface
     public function getGroups(): iterable;
 
     /**
-     * Returns the list of the captured subgroups.
-     *
-     * @return iterable
-     */
-    public function groups(): iterable;
-
-    /**
      * The token value size in bytes.
      *
      * @return int
