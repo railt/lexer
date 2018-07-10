@@ -10,13 +10,15 @@ declare(strict_types=1);
 namespace Railt\Lexer\Driver;
 
 use Railt\Io\Readable;
+use Railt\Lexer\Definition\TokenDefinition;
 use Railt\Lexer\LexerInterface;
+use Railt\Lexer\SimpleLexerInterface;
 use Railt\Lexer\TokenInterface;
 
 /**
  * Class BaseLexer
  */
-abstract class Lexer implements LexerInterface
+abstract class SimpleLexer implements SimpleLexerInterface
 {
     /**
      * @var array|string[]
@@ -69,4 +71,14 @@ abstract class Lexer implements LexerInterface
      * @return \Traversable|TokenInterface[]
      */
     abstract protected function exec(Readable $file): \Traversable;
+
+    /**
+     * @return iterable|TokenDefinition[]
+     */
+    public function getTokenDefinitions(): iterable
+    {
+        foreach ($this->tokens as $name => $pcre) {
+            yield new TokenDefinition($name, $pcre, ! \in_array($name, $this->skipped, true));
+        }
+    }
 }

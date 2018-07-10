@@ -20,7 +20,7 @@ use Railt\Lexer\TokenInterface;
 /**
  * Class NativeRegex
  */
-class NativeRegex extends Lexer
+class NativeRegex extends SimpleLexer
 {
     /**
      * NativeRegex constructor.

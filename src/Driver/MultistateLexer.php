@@ -9,12 +9,13 @@ declare(strict_types=1);
 
 namespace Railt\Lexer\Driver;
 
+use Railt\Lexer\Definition\MultistateTokenDefinition;
 use Railt\Lexer\MultistateLexerInterface;
 
 /**
  * Class MultistateLexer
  */
-abstract class MultistateLexer extends Lexer implements MultistateLexerInterface
+abstract class MultistateLexer extends SimpleLexer implements MultistateLexerInterface
 {
     /**
      * @var int
@@ -46,6 +47,20 @@ abstract class MultistateLexer extends Lexer implements MultistateLexerInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return iterable
+     */
+    public function getTokenDefinitions(): iterable
+    {
+        foreach ($this->tokens as $name => $pcre) {
+            $keep  = ! \in_array($name, $this->skipped, true);
+            $state = $this->getTokenState($name);
+            $next  = $this->getNextState($name);
+
+            yield new MultistateTokenDefinition($name, $pcre, $keep, $state, $next);
+        }
     }
 
     /**

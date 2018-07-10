@@ -12,7 +12,7 @@ namespace Railt\Lexer;
 /**
  * Interface MultistateLexerInterface
  */
-interface MultistateLexerInterface extends LexerInterface
+interface MultistateLexerInterface extends SimpleLexerInterface
 {
     /**
      * Method for indicating the status identifier of the indicated token.
@@ -40,5 +40,5 @@ interface MultistateLexerInterface extends LexerInterface
      * @param int|null $nextState
      * @return MultistateLexerInterface
      */
-    public function state(string $token, int $state, int $nextState = null): self;
+    public function state(string $token, int $state, int $nextState = null): MultistateLexerInterface;
 }

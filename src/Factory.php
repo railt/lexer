@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of Railt package.
+ * This file is part of Lexer package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,40 +9,68 @@ declare(strict_types=1);
 
 namespace Railt\Lexer;
 
-use Parle\Lexer as Parle;
 use Railt\Lexer\Driver\NativeRegex;
 use Railt\Lexer\Driver\ParleLexer;
 
 /**
- * The `Factory` class exists as a convenient way to
- * pick the best available lexer implementation.
+ * Class Lexer
  */
-final class Factory
+class Factory
 {
     /**
-     * Creates a new lexer instance
+     * The factory should return any implementation supporting the PCRE lookahead syntax.
      *
-     * ```php
-     * $lexer = Railt\Lexer\Factory::create();
-     * ```
+     * @var int
+     */
+    public const LOOKAHEAD = 0x02;
+
+    /**
+     * The factory should return any multistate implementation.
      *
-     * This method always returns an instance implementing `LexerInterface` interface,
-     * the actual lexer implementation is an implementation detail.
-     *
-     * This method should usually only be called once at the beginning of the program.
-     *
+     * @var int
+     */
+    public const MULTISTATE = 0x04;
+
+    /**
      * @param array $tokens
      * @param array $skip
-     * @return LexerInterface
+     * @param int $flags
+     * @return LexerInterface|SimpleLexerInterface|MultistateLexerInterface
      * @throws Exception\BadLexemeException
+     * @throws \InvalidArgumentException
      */
-    public static function create(array $tokens = [], array $skip = []): LexerInterface
+    public static function create(array $tokens, array $skip = [], int $flags = self::LOOKAHEAD): LexerInterface
     {
-        if (\class_exists(Parle::class, false)) {
-            return new ParleLexer($tokens, $skip);
-        }
+        switch (true) {
+            case self::isMultistate($flags):
+                $error = \vsprintf('Multistate %slexer does not implemented yet', [
+                    self::isLookahead($flags) ? 'lookahead ' : ''
+                ]);
+                throw new \InvalidArgumentException($error);
 
-        return new NativeRegex($tokens, $skip);
-        // @codeCoverageIgnoreEnd
+            case ! self::isLookahead($flags) && \class_exists(\Parle\Lexer::class, false):
+                return new ParleLexer($tokens, $skip);
+
+            default:
+                return new NativeRegex($tokens, $skip);
+        }
+    }
+
+    /**
+     * @param int $flags
+     * @return bool
+     */
+    private static function isLookahead(int $flags): bool
+    {
+        return (bool)($flags & self::LOOKAHEAD);
+    }
+
+    /**
+     * @param int $flags
+     * @return bool
+     */
+    private static function isMultistate(int $flags): bool
+    {
+        return (bool)($flags & self::MULTISTATE);
     }
 }

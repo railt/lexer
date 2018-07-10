@@ -13,6 +13,7 @@ use Parle\Lexer as Parle;
 use Parle\LexerException;
 use Parle\Token as InternalToken;
 use Railt\Io\Readable;
+use Railt\Lexer\Definition\TokenDefinition;
 use Railt\Lexer\Exception\BadLexemeException;
 use Railt\Lexer\LexerInterface;
 use Railt\Lexer\Result\Eoi;
@@ -23,7 +24,7 @@ use Railt\Lexer\TokenInterface;
 /**
  * Class ParleStateless
  */
-class ParleLexer extends Lexer
+class ParleLexer extends SimpleLexer
 {
     /**
      * @var array|string[]
@@ -155,5 +156,17 @@ class ParleLexer extends Lexer
         $iterator->next();
 
         return new Token($this->map[$current->id], $current->value, $this->lexer->marker);
+    }
+
+    /**
+     * @return iterable|TokenDefinition[]
+     */
+    public function getTokenDefinitions(): iterable
+    {
+        foreach ($this->tokens as $id => $pcre) {
+            $name = $this->map[$id];
+
+            yield new TokenDefinition($name, $pcre, ! \in_array($name, $this->skipped, true));
+        }
     }
 }

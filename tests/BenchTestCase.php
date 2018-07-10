@@ -30,38 +30,15 @@ class BenchTestCase extends BaseTestCase
 ';
 
     /**
-     * @param LexerInterface $lexer
-     * @param array $results
-     * @param int $tokens
-     * @param Readable $sources
-     */
-    private function write(LexerInterface $lexer, array $results, int $tokens, Readable $sources): void
-    {
-        $sum = \array_sum($results);
-        $avg = $sum / \count($results);
-
-        echo \vsprintf(self::TEMPLATE, [
-            \basename(\str_replace('\\', '/', \get_class($lexer))),
-            \basename($sources->getPathname()),
-            $tokens / \count($results),
-            \count($results),
-            $sum,                       /* SUM */
-            $avg,                       /* AVG */
-            $tokens / $sum,              /* TPS */
-        ]);
-        \flush();
-    }
-
-    /**
      * @return array
      * @throws \Railt\Io\Exception\NotReadableException
      */
     public function benchesProvider(): array
     {
         return [
-            [1000, File::fromPathname(__DIR__ . '/resources/little.txt')],
-            [100, File::fromPathname(__DIR__ . '/resources/average.txt')],
-            [10, File::fromPathname(__DIR__ . '/resources/large.txt')],
+            'Little (1000 iterations)' => [1000, File::fromPathname(__DIR__ . '/resources/little.txt')],
+            'Average (100 iterations)' => [100, File::fromPathname(__DIR__ . '/resources/average.txt')],
+            'Large (10 iterations)'    => [10, File::fromPathname(__DIR__ . '/resources/large.txt')],
         ];
     }
 
@@ -80,21 +57,6 @@ class BenchTestCase extends BaseTestCase
         foreach ($tokens as $token => $pcre) {
             $lexer->add($token, $pcre);
         }
-
-        $this->execute($lexer, $samples, $sources);
-    }
-
-    /**
-     * @dataProvider benchesProvider
-     * @param int $samples
-     * @param Readable $sources
-     * @throws \PHPUnit\Framework\AssertionFailedError
-     */
-    public function testNativeRegexLexer(int $samples, Readable $sources): void
-    {
-        $tokens   = require __DIR__ . '/resources/graphql.lex.php';
-
-        $lexer = new NativeRegex($tokens);
 
         $this->execute($lexer, $samples, $sources);
     }
@@ -120,5 +82,43 @@ class BenchTestCase extends BaseTestCase
 
         $this->write($lexer, $results, $cnt, $sources);
         $this->assertTrue(true);
+    }
+
+    /**
+     * @param LexerInterface $lexer
+     * @param array $results
+     * @param int $tokens
+     * @param Readable $sources
+     */
+    private function write(LexerInterface $lexer, array $results, int $tokens, Readable $sources): void
+    {
+        $sum = \array_sum($results);
+        $avg = $sum / \count($results);
+
+        echo \vsprintf(self::TEMPLATE, [
+            \basename(\str_replace('\\', '/', \get_class($lexer))),
+            \basename($sources->getPathname()),
+            $tokens / \count($results),
+            \count($results),
+            $sum,                       /* SUM */
+            $avg,                       /* AVG */
+            $tokens / $sum,              /* TPS */
+        ]);
+        \flush();
+    }
+
+    /**
+     * @dataProvider benchesProvider
+     * @param int $samples
+     * @param Readable $sources
+     * @throws \PHPUnit\Framework\AssertionFailedError
+     */
+    public function testNativeRegexLexer(int $samples, Readable $sources): void
+    {
+        $tokens = require __DIR__ . '/resources/graphql.lex.php';
+
+        $lexer = new NativeRegex($tokens);
+
+        $this->execute($lexer, $samples, $sources);
     }
 }

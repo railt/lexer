@@ -25,48 +25,63 @@ The lexer contains two types of runtime:
 speed between several implementations (Stateful vs Stateless) of the same algorithm, 
 it was decided to abandon the immutable stateful lexers.
 
-## API
+```php
+use Railt\Lexer\Factory;
+
+/**
+ * List of available tokens in format "name => pcre"
+ */
+$tokens = ['T_DIGIT' => '\d+', 'T_WHITESPACE' => '\s+'];
+
+/**
+ * List of skipped tokens
+ */
+$skip   = ['T_WHITESPACE'];
+
+/**
+ * Options:
+ *   0 - Nothing.
+ *   2 - With PCRE lookahead support.
+ *   4 - With multistate support.
+ */
+$flags = Factory::LOOKAHEAD | Factory::MULTISTATE;
+
+/**
+ * Create lexer and tokenize sources. 
+ */
+$lexer = Factory::create($tokens, $skip, $flags);
+```
+
+In order to tokenize the source text, you must use the method `->lex(...)`, which returns 
+iterator of the `TokenInterface` objects.
 
 ```php
-interface LexerInterface
-{
-    public function __construct(array $tokens = [], array $skip = []);
-    
-    public function lex(Readable $input): \Traversable;
-    
-    public function add(string $token, string $pcre): LexerInterface;
-    
-    public function skip(string $name): LexerInterface;
+foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
+    echo $token . "\n";
 }
 ```
 
-```php
-interface MultistateLexerInterface extends LexerInterface
-{
-    public function state(string $token, int $state, int $nextState = null): MultistateLexerInterface;
-}
-```
+A `TokenInterface` provides a convenient API to obtain information about a token:
 
 ```php
 interface TokenInterface
 {
     public function getName(): string;
-    
     public function getOffset(): int;
-    
     public function getValue(int $group = 0): ?string;
-    
     public function getGroups(): iterable;
-    
     public function getBytes(): int;
-    
     public function getLength(): int;
 }
 ```
 
-## Basic
+## Drivers
 
-### NativeRegex
+The factory returns one of the available implementations, however you can create it yourself.
+
+### Basic
+
+#### NativeRegex
 
 `NativeRegex` implementation is based on the built-in php PCRE functions.
 
@@ -74,13 +89,7 @@ interface TokenInterface
 use Railt\Lexer\Driver\NativeRegex;
 use Railt\Io\File;
 
-$lexer = new NativeRegex([
-    'T_WHITESPACE'  => '\s+', 
-    'T_DIGIT'       => '\d+'
-], [
-    'T_WHITESPACE', 
-    'T_EOI'
-]);
+$lexer = new NativeRegex(['T_WHITESPACE' => '\s+', 'T_DIGIT' => '\d+'], ['T_WHITESPACE', 'T_EOI']);
 
 foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
     echo $token->getName() . ' -> ' . $token->getValue() . ' at ' . $token->getOffset() . "\n";
@@ -91,7 +100,7 @@ foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
 // T_DIGIT -> 42 at 3
 ```
 
-### Lexertl
+#### Lexertl
 
 Experimental lexer based on the 
 [C++ lexertl library](https://github.com/BenHanson/lexertl). To use it, you 
@@ -101,13 +110,7 @@ need support for [Parle extension](http://php.net/manual/en/book.parle.php).
 use Railt\Lexer\Driver\ParleLexer;
 use Railt\Io\File;
 
-$lexer = new ParleLexer([
-    'T_WHITESPACE'  => '\s+', 
-    'T_DIGIT'       => '\d+'
-], [
-    'T_WHITESPACE', 
-    'T_EOI'
-]);
+$lexer = new ParleLexer(['T_WHITESPACE' => '\s+', 'T_DIGIT' => '\d+'], ['T_WHITESPACE', 'T_EOI']);
 
 foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
     echo $token->getName() . ' -> ' . $token->getValue() . ' at ' . $token->getOffset() . "\n";
@@ -121,7 +124,7 @@ foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
 > Be careful: The library is not fully compatible with the PCRE regex 
 syntax. See the [official documentation](http://www.benhanson.net/lexertl.html).
 
-## Multistate
+
+### Multistate
 
 This functionality is not yet implemented.
-
