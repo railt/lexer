@@ -40,5 +40,5 @@ interface MultistateLexerInterface extends SimpleLexerInterface
      * @param int|null $nextState
      * @return MultistateLexerInterface
      */
-    public function state(string $token, int $state, int $nextState = null): MultistateLexerInterface;
+    public function state(string $token, int $state, int $nextState = null): self;
 }

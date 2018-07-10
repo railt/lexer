@@ -44,7 +44,7 @@ class Factory
         switch (true) {
             case self::isMultistate($flags):
                 $error = \vsprintf('Multistate %slexer does not implemented yet', [
-                    self::isLookahead($flags) ? 'lookahead ' : ''
+                    self::isLookahead($flags) ? 'lookahead ' : '',
                 ]);
                 throw new \InvalidArgumentException($error);
 
