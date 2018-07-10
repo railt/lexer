@@ -81,4 +81,12 @@ final class Eoi extends BaseToken
     {
         return 0;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return \sprintf('"%s" (%s)', '\0', self::T_NAME);
+    }
 }
