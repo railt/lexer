@@ -33,7 +33,8 @@ This example will read the source text and return the set of tokens from which i
 
 The second argument to the `Factory` class is the list of token names that are ignored in the `lex` method result. 
 That's why we only got two significant tokens `T_DIGIT`. Although this is not entirely true,
-the answer still contains a `T_EOI` (End Of Input) token.
+the answer contains a `T_EOI` (End Of Input) token which can also be removed from the output 
+by adding an array of the second argument of `Factory` class.
 
 ...and now let's try to understand more!
 
