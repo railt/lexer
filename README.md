@@ -17,6 +17,26 @@ compiler inside Travis CI. In this case, a gray badge will be displayed with the
 
 # Lexer
 
+In order to quickly understand how it works - just write ~4 lines of code:
+
+```php
+$lexer = Railt\Lexer\Factory::create(['T_WHITESPACE' => '\s+', 'T_DIGIT' => '\d+'], ['T_WHITESPACE']);
+
+foreach ($lexer->lex(Railt\Io\File::fromSources('23 42')) as $token) {
+    echo $token . "\n";
+}
+```
+
+This example will read the source text and return the set of tokens from which it is composed:
+1) `T_DIGIT` with value "23"
+2) `T_DIGIT` with value "42"
+
+The second argument to the `Factory` class is the list of token names that are ignored in the `lex` method result. 
+That's why we only got two significant tokens `T_DIGIT`. Although this is not entirely true,
+the answer still contains a `T_EOI` (End Of Input) token.
+
+...and now let's try to understand more!
+
 The lexer contains two types of runtime:
 1) [`Basic`](#basic) - Set of algorithms with one state.
 2) [`Multistate`](#multistate) - Set of algorithms with the possibility of state transition between tokens.
