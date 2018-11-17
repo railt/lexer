@@ -51,6 +51,10 @@ class BenchTestCase extends BaseTestCase
      */
     public function testParleLexer(int $samples, Readable $sources): void
     {
+        if (! \class_exists(\Parle\Lexer::class, false)) {
+            $this->markTestSkipped('Parle extension not installed');
+        }
+
         $tokens = require __DIR__ . '/resources/graphql.lex.php';
         $lexer  = new ParleLexer();
 
