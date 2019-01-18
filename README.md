@@ -15,6 +15,10 @@
 > Note: All questions and issues please send 
 to [https://github.com/railt/railt/issues](https://github.com/railt/railt/issues)
 
+> Note: Tests can not always pass correctly. This may be due to the inaccessibility of 
+PPA servers for updating gcc and g++. The lexertl build requires the support of a modern 
+compiler inside Travis CI. In this case, a gray badge will be displayed with the message "Build Error".
+
 In order to quickly understand how it works - just write ~4 lines of code:
 
 ```php
