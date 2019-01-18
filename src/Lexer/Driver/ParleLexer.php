@@ -16,9 +16,9 @@ use Railt\Io\Readable;
 use Railt\Lexer\Definition\TokenDefinition;
 use Railt\Lexer\Exception\BadLexemeException;
 use Railt\Lexer\LexerInterface;
-use Railt\Lexer\Result\Eoi;
-use Railt\Lexer\Result\Token;
-use Railt\Lexer\Result\Unknown;
+use Railt\Lexer\Token\EndOfInput;
+use Railt\Lexer\Token\Token;
+use Railt\Lexer\Token\Unknown;
 use Railt\Lexer\TokenInterface;
 
 /**
@@ -51,7 +51,7 @@ class ParleLexer extends SimpleLexer
     {
         \assert(\class_exists(Parle::class, false));
 
-        $this->lexer   = new Parle();
+        $this->lexer = new Parle();
         $this->skipped = $skip;
 
         foreach ($tokens as $name => $pcre) {
@@ -70,7 +70,7 @@ class ParleLexer extends SimpleLexer
         try {
             $this->lexer->push($pcre, $this->id);
 
-            $this->map[$this->id]    = $name;
+            $this->map[$this->id] = $name;
             $this->tokens[$this->id] = $pcre;
         } catch (LexerException $e) {
             $message = \preg_replace('/rule\h+id\h+\d+/iu', 'token ' . $name, $e->getMessage());
@@ -101,7 +101,7 @@ class ParleLexer extends SimpleLexer
                 : $this->token($iterator);
         }
 
-        yield new Eoi($this->lexer->marker);
+        yield new EndOfInput($this->lexer->marker);
     }
 
     /**
@@ -132,8 +132,8 @@ class ParleLexer extends SimpleLexer
     {
         /** @var InternalToken $current */
         $current = $iterator->current();
-        $offset  = $this->lexer->marker;
-        $body    = '';
+        $offset = $this->lexer->marker;
+        $body = '';
 
         while ($current->id === InternalToken::UNKNOWN) {
             $body .= $current->value;

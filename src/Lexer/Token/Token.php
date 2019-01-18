@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer\Result;
+namespace Railt\Lexer\Token;
 
 /**
  * Class Token
@@ -37,8 +37,8 @@ class Token extends BaseToken
      */
     public function __construct(string $name, $value, int $offset = 0)
     {
-        $this->name   = $name;
-        $this->value  = (array)$value;
+        $this->name = $name;
+        $this->value = (array)$value;
         $this->offset = $offset;
     }
 

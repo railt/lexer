@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Railt\Lexer\Driver\NativeStateful;
 
-use Railt\Lexer\Result\Unknown;
+use Railt\Lexer\Token\Unknown;
 
 /**
  * Class PCRECompiler
@@ -21,8 +21,8 @@ class PCRECompiler
      */
     protected const REGEX_DELIMITER = '/';
 
-    private const FLAG_UNICODE  = 'u';
-    private const FLAG_DOT_ALL  = 's';
+    private const FLAG_UNICODE = 'u';
+    private const FLAG_DOT_ALL = 's';
     private const FLAG_ANALYZED = 'S';
 
     /**
@@ -70,7 +70,7 @@ class PCRECompiler
         $tokensList = [];
 
         foreach ($tokens as $name => $pcre) {
-            $name  = $this->escapeTokenName($name);
+            $name = $this->escapeTokenName($name);
             $value = $this->escapeTokenPattern($pcre);
 
             $tokensList[] = \sprintf('(?P<%s>%s)', \trim($name), $value);
