@@ -31,14 +31,15 @@ class Token extends BaseToken
 
     /**
      * Token constructor.
+     *
      * @param string $name
      * @param string|array $value
      * @param int $offset
      */
     public function __construct(string $name, $value, int $offset = 0)
     {
-        $this->name   = $name;
-        $this->value  = (array)$value;
+        $this->name = $name;
+        $this->value = (array)$value;
         $this->offset = $offset;
     }
 
