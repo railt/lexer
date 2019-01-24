@@ -30,7 +30,7 @@ class NativeRegex extends SimpleLexer
      */
     public function __construct(array $tokens = [], array $skip = [])
     {
-        $this->tokens = $tokens;
+        $this->tokens  = $tokens;
         $this->skipped = $skip;
     }
 
@@ -43,7 +43,7 @@ class NativeRegex extends SimpleLexer
     protected function exec(Readable $file): \Traversable
     {
         $offset = 0;
-        $regex = new RegexNamedGroupsIterator($this->getPattern(), $file->getContents());
+        $regex  = new RegexNamedGroupsIterator($this->getPattern(), $file->getContents());
 
         $iterator = $regex->getIterator();
 
