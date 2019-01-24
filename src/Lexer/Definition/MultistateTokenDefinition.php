@@ -26,7 +26,6 @@ class MultistateTokenDefinition extends TokenDefinition
 
     /**
      * MultistateTokenDefinition constructor.
-     *
      * @param string $name
      * @param string $pcre
      * @param bool $keep
@@ -36,7 +35,7 @@ class MultistateTokenDefinition extends TokenDefinition
     public function __construct(string $name, string $pcre, bool $keep = true, int $state = 0, int $nextState = 0)
     {
         parent::__construct($name, $pcre, $keep);
-        $this->state     = $state;
+        $this->state = $state;
         $this->nextState = $nextState;
     }
 

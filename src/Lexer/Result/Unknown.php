@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer\Token;
+namespace Railt\Lexer\Result;
 
 /**
  * Class Unknown
@@ -21,7 +21,6 @@ final class Unknown extends Token
 
     /**
      * Undefined constructor.
-     *
      * @param string $value
      * @param int $offset
      */

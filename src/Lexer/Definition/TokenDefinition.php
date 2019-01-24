@@ -31,7 +31,6 @@ class TokenDefinition
 
     /**
      * TokenDefinition constructor.
-     *
      * @param string $name
      * @param string $pcre
      * @param bool $keep

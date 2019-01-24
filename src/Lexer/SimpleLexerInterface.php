@@ -16,7 +16,6 @@ interface SimpleLexerInterface extends LexerInterface
 {
     /**
      * LexerInterface constructor.
-     *
      * @param array $tokens
      * @param array $skip
      */

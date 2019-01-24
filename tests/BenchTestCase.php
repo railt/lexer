@@ -27,6 +27,7 @@ class BenchTestCase extends BaseTestCase
 | Time          | %01.5fs
 | AVG           | %01.5fs
 | Token/s       | %d
+
 ';
 
     /**
@@ -51,12 +52,8 @@ class BenchTestCase extends BaseTestCase
      */
     public function testParleLexer(int $samples, Readable $sources): void
     {
-        if (! \class_exists(\Parle\Lexer::class, false)) {
-            $this->markTestSkipped('Parle extension not installed');
-        }
-
         $tokens = require __DIR__ . '/resources/graphql.lex.php';
-        $lexer  = new ParleLexer();
+        $lexer = new ParleLexer();
 
         foreach ($tokens as $token => $pcre) {
             $lexer->add($token, $pcre);
@@ -73,7 +70,7 @@ class BenchTestCase extends BaseTestCase
      */
     private function execute(LexerInterface $lexer, int $samples, Readable $sources): void
     {
-        $cnt     = 0;
+        $cnt = 0;
         $results = [];
 
         for ($i = 0; $i < $samples; ++$i) {

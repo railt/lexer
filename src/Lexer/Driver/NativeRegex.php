@@ -12,9 +12,9 @@ namespace Railt\Lexer\Driver;
 use Railt\Io\Readable;
 use Railt\Lexer\Driver\NativeStateful\PCRECompiler;
 use Railt\Lexer\Iterator\RegexNamedGroupsIterator;
-use Railt\Lexer\Token\EndOfInput;
-use Railt\Lexer\Token\Token;
-use Railt\Lexer\Token\Unknown;
+use Railt\Lexer\Result\Eoi;
+use Railt\Lexer\Result\Token;
+use Railt\Lexer\Result\Unknown;
 use Railt\Lexer\TokenInterface;
 
 /**
@@ -24,13 +24,12 @@ class NativeRegex extends SimpleLexer
 {
     /**
      * NativeRegex constructor.
-     *
      * @param array $tokens
      * @param array $skip
      */
     public function __construct(array $tokens = [], array $skip = [])
     {
-        $this->tokens  = $tokens;
+        $this->tokens = $tokens;
         $this->skipped = $skip;
     }
 
@@ -43,7 +42,7 @@ class NativeRegex extends SimpleLexer
     protected function exec(Readable $file): \Traversable
     {
         $offset = 0;
-        $regex  = new RegexNamedGroupsIterator($this->getPattern(), $file->getContents());
+        $regex = new RegexNamedGroupsIterator($this->getPattern(), $file->getContents());
 
         $iterator = $regex->getIterator();
 
@@ -58,7 +57,7 @@ class NativeRegex extends SimpleLexer
             yield $token;
         }
 
-        yield new EndOfInput($offset);
+        yield new Eoi($offset);
     }
 
     /**

@@ -7,12 +7,12 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer\Token;
+namespace Railt\Lexer\Result;
 
 /**
  * Class Eoi
  */
-final class EndOfInput extends BaseToken
+final class Eoi extends BaseToken
 {
     /**
      * End of input token name
@@ -26,7 +26,6 @@ final class EndOfInput extends BaseToken
 
     /**
      * Eoi constructor.
-     *
      * @param int $offset
      */
     public function __construct(int $offset)

@@ -7,9 +7,9 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer\Token;
+namespace Railt\Lexer\Result;
 
-use Railt\Lexer\Token\Common\Renderable;
+use Railt\Lexer\Result\Common\Renderable;
 use Railt\Lexer\TokenInterface;
 
 /**
