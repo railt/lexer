@@ -36,4 +36,14 @@ interface BuilderInterface extends ConfigurationInterface
      * @return LexerInterface
      */
     public function build(string $initialState = DefinitionInterface::DEFAULT_STATE): LexerInterface;
+
+    /**
+     * @return array|string[]
+     */
+    public function getPatterns(): array;
+
+    /**
+     * @return array|array[]
+     */
+    public function getJumps(): array;
 }

@@ -64,8 +64,22 @@ class Builder implements BuilderInterface
      */
     public function build(string $initial = DefinitionInterface::DEFAULT_STATE): LexerInterface
     {
-        $factory = new Facade($this, $this->tokens);
+        return new Lexer($this->getPatterns(), $this->getJumps(), $initial);
+    }
 
-        return new Lexer($factory->getPatterns(), $factory->getJumps(), $initial);
+    /**
+     * @return array
+     */
+    public function getPatterns(): array
+    {
+        return (new Facade($this, $this->tokens))->getPatterns();
+    }
+
+    /**
+     * @return array
+     */
+    public function getJumps(): array
+    {
+        return (new Facade($this, $this->tokens))->getJumps();
     }
 }
