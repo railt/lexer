@@ -106,9 +106,17 @@ $builder = new Builder();
 /** @var \Railt\Lexer\LexerInterface $lexer */
 $lexer = $builder->build();
 
-$iterator = $lexer->lex(File::fromPathname(__DIR__ . '/example.txt'));
+// Runtime
+$file = File::fromPathname(__DIR__ . '/example.txt');
 
-foreach ($iterator as $token) {
+foreach ($lexer->lex($file) as $token) {
     echo $token . "\n";
+    
+    if ($token instanceof \Railt\Lexer\Token\Unknown) {
+        $exception = new \Railt\Lexer\Exception\UnrecognizedTokenException('Error');
+        $exception->throwsIn($file, $token->getOffset());
+        
+        throw $exception;
+    }
 }
 ```
