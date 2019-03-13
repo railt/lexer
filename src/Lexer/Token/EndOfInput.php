@@ -9,76 +9,33 @@ declare(strict_types=1);
 
 namespace Railt\Lexer\Token;
 
+use Railt\Lexer\LexerInterface;
+
 /**
  * Class Eoi
  */
-final class EndOfInput extends BaseToken
+final class EndOfInput extends Token
 {
     /**
      * End of input token name
      */
-    public const T_NAME = 'T_EOI';
-
-    /**
-     * @var int
-     */
-    private $offset;
+    public const T_NAME = LexerInterface::T_EOI;
 
     /**
      * Eoi constructor.
      *
      * @param int $offset
+     * @param string|null $state
      */
-    public function __construct(int $offset)
+    public function __construct(int $offset, string $state = null)
     {
-        $this->offset = $offset;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOffset(): int
-    {
-        return $this->offset;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return static::T_NAME;
-    }
-
-    /**
-     * @param int|null $offset
-     * @return string
-     */
-    public function getValue(int $offset = null): string
-    {
-        return "\0";
-    }
-
-    /**
-     * @return iterable|string[]
-     */
-    public function getGroups(): iterable
-    {
-        return [$this->getValue()];
+        parent::__construct(self::T_NAME, "\0", $offset, $state);
     }
 
     /**
      * @return int
      */
     public function getBytes(): int
-    {
-        return 0;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLength(): int
     {
         return 0;
     }

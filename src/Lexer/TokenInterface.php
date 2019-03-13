@@ -15,45 +15,42 @@ namespace Railt\Lexer;
 interface TokenInterface
 {
     /**
-     * Token name.
+     * @var string
+     */
+    public const DEFAULT_TOKEN_STATE = 'default';
+
+    /**
+     * Returns the namespace (scope) of the token.
+     *
+     * @return string
+     */
+    public function getState(): string;
+
+    /**
+     * Returns the name of the token.
      *
      * @return string
      */
     public function getName(): string;
 
     /**
-     * Token position in bytes.
+     * Token position in bytes relative to the beginning of the source.
      *
      * @return int
      */
     public function getOffset(): int;
 
     /**
-     * Returns the value of the captured subgroup.
+     * Returns the captured value.
      *
-     * @param int $group Number of subgroup
-     * @return string|null If the group is not found, the null will return.
+     * @return string
      */
-    public function getValue(int $group = 0): ?string;
+    public function getValue(): string;
 
     /**
-     * Returns the list of the captured subgroups.
-     *
-     * @return iterable
-     */
-    public function getGroups(): iterable;
-
-    /**
-     * The token value size in bytes.
+     * Returns the token value size in bytes.
      *
      * @return int
      */
     public function getBytes(): int;
-
-    /**
-     * The token value size in chars (multibyte encodings contain several bytes).
-     *
-     * @return int
-     */
-    public function getLength(): int;
 }

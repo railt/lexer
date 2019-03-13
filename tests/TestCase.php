@@ -7,13 +7,11 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer\Exception;
+namespace Railt\Tests\Lexer;
 
-use Railt\Io\Exception\ExternalFileException;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
-/**
- * Class LexerException
- */
-class LexerException extends ExternalFileException
+abstract class TestCase extends BaseTestCase
 {
+
 }

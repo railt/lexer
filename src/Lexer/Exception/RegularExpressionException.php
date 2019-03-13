@@ -10,8 +10,9 @@ declare(strict_types=1);
 namespace Railt\Lexer\Exception;
 
 /**
- * Class BadLexemeException
+ * Class RegularExpressionException
  */
-class BadLexemeException extends \LogicException
+class RegularExpressionException extends LogicException
 {
+
 }

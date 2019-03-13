@@ -7,13 +7,11 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Tests\Lexer;
-
-use PHPUnit\Framework\TestCase;
+namespace Railt\Lexer\Exception;
 
 /**
- * Class BaseTestCase
+ * Class LogicException
  */
-abstract class BaseTestCase extends TestCase
+class LogicException extends LexerException
 {
 }

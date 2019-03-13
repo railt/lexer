@@ -7,12 +7,14 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer\Iterator;
+namespace Railt\Lexer\Runtime;
+
+use Railt\Lexer\Exception\RegularExpressionException;
 
 /**
- * An iterator which returns a list of regex groups
+ * Class Validator
  */
-class RegexIterator implements \IteratorAggregate
+class Validator
 {
     /**
      * @var string
@@ -22,7 +24,7 @@ class RegexIterator implements \IteratorAggregate
     /**
      * @var string
      */
-    public const PREG_INTERNAL_ERROR = 'There was an internal PCRE error';
+    public const PREG_INTERNAL_ERROR = 'The given PCRE contain a syntax error';
 
     /**
      * @var string
@@ -45,71 +47,37 @@ class RegexIterator implements \IteratorAggregate
     public const PREG_BAD_UTF8_OFFSET_ERROR = 'Malformed UTF-8 data';
 
     /**
-     * @var string
-     */
-    private $pattern;
-
-    /**
-     * @var string
-     */
-    private $subject;
-
-    /**
-     * RegexIterator constructor.
+     * Checks the result for correctness.
+     * <code>
+     *  Validator::assert(@\preg_match(....), \preg_last_error());
+     * </code>
      *
-     * @param string $pattern
-     * @param string $subject
+     * @param mixed|null $result PCRE function result
+     * @param int $code PCRE error code
+     * @return bool
+     * @throws RegularExpressionException
      */
-    public function __construct(string $pattern, string $subject)
+    public static function assert($result, int $code): bool
     {
-        $this->pattern = $pattern;
-        $this->subject = $subject;
-    }
-
-    /**
-     * @return \Traversable|array[]
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     */
-    public function getIterator(): \Traversable
-    {
-        $result = new \SplQueue();
-
-        $status = @\preg_replace_callback($this->pattern, function (array $matches) use ($result): void {
-            $result->push($matches);
-        }, $this->subject);
-
-        $this->validate($status);
-
-        return $result;
-    }
-
-    /**
-     * @param int|null|bool|string|float $status
-     * @return void
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     */
-    private function validate($status): void
-    {
-        $code = \preg_last_error();
-
         if ($code !== \PREG_NO_ERROR) {
-            throw new \RuntimeException($this->getErrorMessage($code), $code);
+            throw new RegularExpressionException(self::getErrorMessage($code), $code);
         }
 
-        if ($status === null) {
+        if ($result === null) {
             $parts = \explode(':', \error_get_last()['message'] ?? '');
             $error = \sprintf('%s, %s', self::PREG_PARSING_ERROR, \trim(\end($parts)));
-            throw new \InvalidArgumentException($error);
+
+            throw new RegularExpressionException($error);
         }
+
+        return true;
     }
 
     /**
      * @param int $code
      * @return string
      */
-    private function getErrorMessage(int $code): string
+    private static function getErrorMessage(int $code): string
     {
         switch ($code) {
             case \PREG_INTERNAL_ERROR:
@@ -127,14 +95,7 @@ class RegexIterator implements \IteratorAggregate
             case \PREG_BAD_UTF8_OFFSET_ERROR:
                 return self::PREG_BAD_UTF8_OFFSET_ERROR;
         }
-        return 'Unexpected PCRE error (Code ' . $code . ')';
-    }
 
-    /**
-     * Destroy current body
-     */
-    public function __destruct()
-    {
-        unset($this->pattern, $this->subject);
+        return 'Unexpected PCRE error (Code ' . $code . ')';
     }
 }
