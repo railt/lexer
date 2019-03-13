@@ -42,7 +42,7 @@ class TokenDefinition implements DefinitionInterface
      */
     public function __construct(string $name, string $pattern)
     {
-        $this->name = $name;
+        $this->name    = $name;
         $this->pattern = $pattern;
     }
 
