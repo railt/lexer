@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Railt\Lexer;
 
 use Railt\Io\Readable;
-use Railt\Lexer\Token\EndOfInput;
 
 /**
  * Interface LexerInterface

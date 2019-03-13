@@ -53,10 +53,10 @@ class Token implements TokenInterface
      */
     public function __construct(string $name, string $value, int $offset = 0, string $state = null)
     {
-        $this->name = $name;
-        $this->value = $value;
+        $this->name   = $name;
+        $this->value  = $value;
         $this->offset = $offset;
-        $this->state = $state;
+        $this->state  = $state;
     }
 
     /**

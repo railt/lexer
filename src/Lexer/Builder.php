@@ -9,9 +9,9 @@ declare(strict_types=1);
 
 namespace Railt\Lexer;
 
-use Railt\Lexer\Builder\Facade;
 use Railt\Lexer\Builder\ConfigurationTrait;
 use Railt\Lexer\Builder\DefinitionInterface;
+use Railt\Lexer\Builder\Facade;
 use Railt\Lexer\Builder\TokenDefinition;
 
 /**
@@ -47,7 +47,7 @@ class Builder implements BuilderInterface
      */
     public function add(string $token, string $pattern, string $state = null, string $then = null): DefinitionInterface
     {
-         return $this->tokens[] = (new TokenDefinition($token, $pattern))->in($state)->then($then);
+        return $this->tokens[] = (new TokenDefinition($token, $pattern))->in($state)->then($then);
     }
 
     /**

@@ -14,5 +14,4 @@ namespace Railt\Lexer\Exception;
  */
 class RegularExpressionException extends LogicException
 {
-
 }

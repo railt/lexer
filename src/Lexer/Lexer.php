@@ -49,9 +49,9 @@ class Lexer implements LexerInterface
      */
     public function __construct(array $patterns, array $jumps, string $initial = null)
     {
-        $this->states = $this->bootRegexIterators($patterns);
+        $this->states  = $this->bootRegexIterators($patterns);
         $this->initial = $initial ?? DefinitionInterface::DEFAULT_STATE;
-        $this->jumps = $jumps;
+        $this->jumps   = $jumps;
     }
 
     /**
@@ -93,7 +93,7 @@ class Lexer implements LexerInterface
 
         while (true) {
             $current = $state;
-            $buffer = $this->lexState($state, $input, $offset);
+            $buffer  = $this->lexState($state, $input, $offset);
 
             // @formatter:off
             foreach ($buffer as [
@@ -101,7 +101,7 @@ class Lexer implements LexerInterface
                 RegexIterator::TOKEN_VALUE  => $value,
                 RegexIterator::TOKEN_OFFSET => $offset,
             ]) {
-            // @formatter:on
+                // @formatter:on
                 switch ($name) {
                     case EndOfInput::T_NAME:
                         yield new EndOfInput($offset, $current);
