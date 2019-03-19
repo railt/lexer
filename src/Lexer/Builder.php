@@ -68,6 +68,14 @@ class Builder implements BuilderInterface
     }
 
     /**
+     * @return LexerInterface
+     */
+    public function getLexer(): LexerInterface
+    {
+        return $this->build();
+    }
+
+    /**
      * @return array
      */
     public function getPatterns(): array

@@ -11,11 +11,12 @@ namespace Railt\Lexer;
 
 use Railt\Lexer\Builder\ConfigurationInterface;
 use Railt\Lexer\Builder\DefinitionInterface;
+use Railt\Lexer\Builder\ProvidesLexer;
 
 /**
  * Interface BuilderInterface
  */
-interface BuilderInterface extends ConfigurationInterface
+interface BuilderInterface extends ConfigurationInterface, ProvidesLexer
 {
     /**
      * @param string $token

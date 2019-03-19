@@ -26,12 +26,12 @@ class PCREBuilder
     /**
      * @var string
      */
-    private const REGEX_PATTERN = '%s\G%s%1$s%s';
+    private const REGEX_PATTERN = '%s\G(?|%s)%1$s%s';
 
     /**
      * @var string
      */
-    private const REGEX_CHUNK_PATTERN = '(?P<%s>%s)';
+    private const REGEX_CHUNK_PATTERN = '(?:%2$s)(*MARK:%1$s)';
 
     /**
      * @var string

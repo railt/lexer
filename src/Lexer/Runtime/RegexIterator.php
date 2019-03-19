@@ -48,53 +48,33 @@ class RegexIterator
 
     /**
      * @param string $subject
-     * @param \Generator $coroutine
      * @param int $offset
+     * @return \Traversable
      * @throws \Railt\Lexer\Exception\RegularExpressionException
      */
-    public function lex(string $subject, \Generator $coroutine, int $offset = 0): void
+    public function lex(string $subject, int $offset = 0): \Traversable
     {
         $size = \strlen($subject);
-
-        $executor = function (array $matches) use ($coroutine, &$offset, $size): void {
-            if (! $coroutine->valid()) {
-                return;
-            }
-
-            foreach (\array_reverse($matches) as $name => $value) {
-                if (\is_string($name) && ($length = \strlen($value)) > 0) {
-                    $data = [
-                        static::TOKEN_NAME   => $name,
-                        static::TOKEN_VALUE  => $value,
-                        static::TOKEN_OFFSET => $offset,
-                    ];
-
-                    $coroutine->send($data);
-
-                    $offset += $length;
-                }
-            }
-
-            if ($offset === $size) {
-                $this->complete($coroutine, $offset);
-            }
-        };
-
-        $status = @\preg_replace_callback($this->pattern, $executor, \substr($subject, $offset));
+        $status = \preg_match_all($this->pattern, $subject, $matches, \PREG_SET_ORDER, $offset);
 
         \assert(Validator::assert($status, \preg_last_error()));
-    }
 
-    /**
-     * @param \Generator $coroutine
-     * @param int $offset
-     */
-    private function complete(\Generator $coroutine, int $offset): void
-    {
-        $coroutine->send([
-            static::TOKEN_NAME   => EndOfInput::T_NAME,
-            static::TOKEN_VALUE  => "\0",
-            static::TOKEN_OFFSET => $offset,
-        ]);
+        foreach ($matches as $match) {
+            yield [
+                static::TOKEN_NAME   => $match['MARK'],
+                static::TOKEN_VALUE  => $match[0],
+                static::TOKEN_OFFSET => $offset,
+            ];
+
+            $offset += \strlen($match[0]);
+        }
+
+        if ($offset === $size) {
+            yield [
+                static::TOKEN_NAME   => EndOfInput::T_NAME,
+                static::TOKEN_VALUE  => "\0",
+                static::TOKEN_OFFSET => $offset,
+            ];
+        }
     }
 }

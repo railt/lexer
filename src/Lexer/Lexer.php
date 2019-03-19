@@ -144,29 +144,21 @@ class Lexer implements LexerInterface
 
         $iterator = $this->states[$state];
 
-        $iterator->lex($input->getContents(), $this->executor($state, $buffer), $offset);
+        foreach ($iterator->lex($input->getContents(), $offset) as $data) {
+            [$name] = $buffer[] = $data;
 
-        return $buffer;
-    }
-
-    /**
-     * @param string $state
-     * @param array $buffer
-     * @return \Generator
-     */
-    private function executor(string &$state, array &$buffer = []): \Generator
-    {
-        while ([$name] = $buffer[] = yield) {
             if ($name === LexerInterface::T_EOI) {
                 break;
             }
 
-            $nextState = $this->jumps[$state][$name] ?? null;
+            $next = $this->jumps[$state][$name] ?? null;
 
-            if (\is_string($nextState)) {
-                $state = $nextState;
+            if (\is_string($next)) {
+                $state = $next;
                 break;
             }
         }
+
+        return $buffer;
     }
 }
