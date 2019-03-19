@@ -54,7 +54,7 @@ class RegexIterator
      */
     public function lex(string $subject, int $offset = 0): \Traversable
     {
-        $size = \strlen($subject);
+        $size   = \strlen($subject);
         $status = \preg_match_all($this->pattern, $subject, $matches, \PREG_SET_ORDER, $offset);
 
         \assert(Validator::assert($status, \preg_last_error()));
