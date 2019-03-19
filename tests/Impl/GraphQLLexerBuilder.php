@@ -93,5 +93,3 @@ class GraphQLLexerBuilder implements ProvidesLexer
         return $builder->build();
     }
 }
-
-

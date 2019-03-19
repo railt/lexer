@@ -50,5 +50,3 @@ class JsonLexerBuilder implements ProvidesLexer
         return $builder->build();
     }
 }
-
-

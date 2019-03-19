@@ -12,7 +12,6 @@ namespace Railt\Tests\Lexer\Impl;
 use Railt\Lexer\Builder;
 use Railt\Lexer\Builder\ProvidesLexer;
 use Railt\Lexer\LexerInterface;
-use Railt\Lexer\TokenInterface;
 
 /**
  * Class PP2LexerBuilder
@@ -66,5 +65,3 @@ class PP2LexerBuilder implements ProvidesLexer
         return $builder->build();
     }
 }
-
-

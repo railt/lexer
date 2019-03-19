@@ -76,5 +76,3 @@ class SDLLexerBuilder implements ProvidesLexer
         return $builder->build();
     }
 }
-
-

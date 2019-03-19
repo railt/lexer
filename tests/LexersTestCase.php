@@ -91,7 +91,7 @@ class LexersTestCase extends TestCase
 
         $this->assertStringEqualsFile($out, $json);
 
-        $name = \basename(\dirname($file->getPathname())) . '/' . \basename($file->getPathname());
+        $name                    = \basename(\dirname($file->getPathname())) . '/' . \basename($file->getPathname());
         self::$benchmarks[$name] = \round((\microtime(true) - $bench) * 1000) . 'ms';
     }
 
