@@ -55,10 +55,10 @@ class Lexer implements LexerInterface
      */
     public function __construct(array $patterns, array $skip, array $jumps, string $initial = null)
     {
-        $this->states = $this->bootRegexIterators($patterns);
+        $this->states  = $this->bootRegexIterators($patterns);
         $this->initial = $initial ?? DefinitionInterface::DEFAULT_STATE;
-        $this->jumps = $jumps;
-        $this->skip = $skip;
+        $this->jumps   = $jumps;
+        $this->skip    = $skip;
     }
 
     /**
@@ -100,7 +100,7 @@ class Lexer implements LexerInterface
 
         while (true) {
             $current = $state;
-            $buffer = $this->lexState($state, $input, $offset);
+            $buffer  = $this->lexState($state, $input, $offset);
 
             // @formatter:off
             foreach ($buffer as [

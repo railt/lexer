@@ -66,7 +66,7 @@ class SDLLexerBuilder implements ProvidesLexer
      * @var string[]
      */
     private const SKIP = [
-        'skip'
+        'skip',
     ];
 
     /**

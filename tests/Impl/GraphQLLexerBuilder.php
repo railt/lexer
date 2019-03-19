@@ -93,7 +93,7 @@ class GraphQLLexerBuilder implements ProvidesLexer
         'T_UTF16BE_BOM',
         'T_UTF16LE_BOM',
         'T_UTF8_BOM',
-        'T_UTF7_BOM'
+        'T_UTF7_BOM',
     ];
 
     /**

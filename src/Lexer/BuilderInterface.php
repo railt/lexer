@@ -31,7 +31,7 @@ interface BuilderInterface extends ConfigurationInterface, ProvidesLexer
      * @param string $token
      * @return BuilderInterface|$this
      */
-    public function skip(string $token): BuilderInterface;
+    public function skip(string $token): self;
 
     /**
      * @return iterable|DefinitionInterface[]
