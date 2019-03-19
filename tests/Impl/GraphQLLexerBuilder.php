@@ -80,6 +80,23 @@ class GraphQLLexerBuilder implements ProvidesLexer
     ];
 
     /**
+     * @var string[]
+     */
+    private const SKIP = [
+        'T_COMMENT',
+        'T_HTAB',
+        'T_LF',
+        'T_CR',
+        'T_WHITESPACE',
+        'T_UTF32BE_BOM',
+        'T_UTF32LE_BOM',
+        'T_UTF16BE_BOM',
+        'T_UTF16LE_BOM',
+        'T_UTF8_BOM',
+        'T_UTF7_BOM'
+    ];
+
+    /**
      * @return LexerInterface
      */
     public function getLexer(): LexerInterface
@@ -88,6 +105,10 @@ class GraphQLLexerBuilder implements ProvidesLexer
 
         foreach (self::TOKENS as $name => $pattern) {
             $builder->add($name, $pattern);
+        }
+
+        foreach (self::SKIP as $name) {
+            $builder->skip($name);
         }
 
         return $builder->build();

@@ -28,6 +28,12 @@ interface BuilderInterface extends ConfigurationInterface, ProvidesLexer
     public function add(string $token, string $pattern, string $state = null, string $then = null): DefinitionInterface;
 
     /**
+     * @param string $token
+     * @return BuilderInterface|$this
+     */
+    public function skip(string $token): BuilderInterface;
+
+    /**
      * @return iterable|DefinitionInterface[]
      */
     public function all(): iterable;
@@ -47,4 +53,9 @@ interface BuilderInterface extends ConfigurationInterface, ProvidesLexer
      * @return array|array[]
      */
     public function getJumps(): array;
+
+    /**
+     * @return array|string[]
+     */
+    public function getSkippedTokens(): array;
 }

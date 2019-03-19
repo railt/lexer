@@ -52,6 +52,15 @@ class PP2LexerBuilder implements ProvidesLexer
     ];
 
     /**
+     * @var string[]
+     */
+    private const SKIP = [
+        'T_WHITESPACE',
+        'T_COMMENT',
+        'T_BLOCK_COMMENT',
+    ];
+
+    /**
      * @return LexerInterface
      */
     public function getLexer(): LexerInterface
@@ -60,6 +69,10 @@ class PP2LexerBuilder implements ProvidesLexer
 
         foreach (self::TOKENS as $name => $pattern) {
             $builder->add($name, $pattern);
+        }
+
+        foreach (self::SKIP as $name) {
+            $builder->skip($name);
         }
 
         return $builder->build();

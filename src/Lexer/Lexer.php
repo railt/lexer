@@ -41,17 +41,24 @@ class Lexer implements LexerInterface
     private $jumps;
 
     /**
+     * @var array|string[]
+     */
+    private $skip;
+
+    /**
      * Lexer constructor.
      *
-     * @param array $patterns
-     * @param array $jumps
+     * @param array|string[] $patterns
+     * @param array|array[] $jumps
+     * @param array|string[] $skip
      * @param string|null $initial
      */
-    public function __construct(array $patterns, array $jumps, string $initial = null)
+    public function __construct(array $patterns, array $skip, array $jumps, string $initial = null)
     {
-        $this->states  = $this->bootRegexIterators($patterns);
+        $this->states = $this->bootRegexIterators($patterns);
         $this->initial = $initial ?? DefinitionInterface::DEFAULT_STATE;
-        $this->jumps   = $jumps;
+        $this->jumps = $jumps;
+        $this->skip = $skip;
     }
 
     /**
@@ -93,7 +100,7 @@ class Lexer implements LexerInterface
 
         while (true) {
             $current = $state;
-            $buffer  = $this->lexState($state, $input, $offset);
+            $buffer = $this->lexState($state, $input, $offset);
 
             // @formatter:off
             foreach ($buffer as [
@@ -145,7 +152,11 @@ class Lexer implements LexerInterface
         $iterator = $this->states[$state];
 
         foreach ($iterator->lex($input->getContents(), $offset) as $data) {
-            [$name] = $buffer[] = $data;
+            [$name] = $data;
+
+            if (! \in_array($name, $this->skip, true)) {
+                $buffer[] = $data;
+            }
 
             if ($name === LexerInterface::T_EOI) {
                 break;

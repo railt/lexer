@@ -63,6 +63,13 @@ class SDLLexerBuilder implements ProvidesLexer
     ];
 
     /**
+     * @var string[]
+     */
+    private const SKIP = [
+        'skip'
+    ];
+
+    /**
      * @return LexerInterface
      */
     public function getLexer(): LexerInterface
@@ -71,6 +78,10 @@ class SDLLexerBuilder implements ProvidesLexer
 
         foreach (self::TOKENS as $name => $pattern) {
             $builder->add($name, $pattern);
+        }
+
+        foreach (self::SKIP as $name) {
+            $builder->skip($name);
         }
 
         return $builder->build();

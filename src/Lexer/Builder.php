@@ -27,6 +27,11 @@ class Builder implements BuilderInterface
     private $tokens = [];
 
     /**
+     * @var array|string[]
+     */
+    private $skip = [];
+
+    /**
      * Builder constructor.
      *
      * @param int|null $options
@@ -36,6 +41,17 @@ class Builder implements BuilderInterface
         if ($options !== null) {
             $this->options = $options;
         }
+    }
+
+    /**
+     * @param string $token
+     * @return BuilderInterface
+     */
+    public function skip(string $token): BuilderInterface
+    {
+        $this->skip[] = $token;
+
+        return $this;
     }
 
     /**
@@ -64,7 +80,7 @@ class Builder implements BuilderInterface
      */
     public function build(string $initial = DefinitionInterface::DEFAULT_STATE): LexerInterface
     {
-        return new Lexer($this->getPatterns(), $this->getJumps(), $initial);
+        return new Lexer($this->getPatterns(), $this->getSkippedTokens(), $this->getJumps(), $initial);
     }
 
     /**
@@ -89,5 +105,13 @@ class Builder implements BuilderInterface
     public function getJumps(): array
     {
         return (new Facade($this, $this->tokens))->getJumps();
+    }
+
+    /**
+     * @return array|string[]
+     */
+    public function getSkippedTokens(): array
+    {
+        return $this->skip;
     }
 }
