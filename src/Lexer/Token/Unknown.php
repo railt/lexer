@@ -7,9 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer\Token;
-
-use Railt\Lexer\LexerInterface;
+namespace Railt\Component\Lexer\Token;
 
 /**
  * Class Unknown
@@ -19,17 +17,16 @@ final class Unknown extends Token
     /**
      * Unknown token name.
      */
-    public const T_NAME = LexerInterface::T_UNKNOWN;
+    public const T_NAME = 'T_UNKNOWN';
 
     /**
-     * Undefined token constructor.
+     * Undefined constructor.
      *
      * @param string $value
      * @param int $offset
-     * @param string|null $state
      */
-    public function __construct(string $value, int $offset = 0, string $state = null)
+    public function __construct(string $value, int $offset = 0)
     {
-        parent::__construct(static::T_NAME, $value, $offset, $state);
+        parent::__construct(static::T_NAME, $value, $offset);
     }
 }

@@ -7,7 +7,7 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer;
+namespace Railt\Component\Lexer;
 
 /**
  * The lexical token that returns from stream.
@@ -15,42 +15,45 @@ namespace Railt\Lexer;
 interface TokenInterface
 {
     /**
-     * @var string
-     */
-    public const DEFAULT_TOKEN_STATE = 'default';
-
-    /**
-     * Returns the namespace (scope) of the token.
-     *
-     * @return string
-     */
-    public function getState(): string;
-
-    /**
-     * Returns the name of the token.
+     * Token name.
      *
      * @return string
      */
     public function getName(): string;
 
     /**
-     * Token position in bytes relative to the beginning of the source.
+     * Token position in bytes.
      *
      * @return int
      */
     public function getOffset(): int;
 
     /**
-     * Returns the captured value.
+     * Returns the value of the captured subgroup.
      *
-     * @return string
+     * @param int $group Number of subgroup
+     * @return string|null If the group is not found, the null will return.
      */
-    public function getValue(): string;
+    public function getValue(int $group = 0): ?string;
 
     /**
-     * Returns the token value size in bytes.
+     * Returns the list of the captured subgroups.
+     *
+     * @return iterable
+     */
+    public function getGroups(): iterable;
+
+    /**
+     * The token value size in bytes.
      *
      * @return int
      */
     public function getBytes(): int;
+
+    /**
+     * The token value size in chars (multibyte encodings contain several bytes).
+     *
+     * @return int
+     */
+    public function getLength(): int;
 }

@@ -20,103 +20,139 @@
 > Note: All questions and issues please send 
 to [https://github.com/railt/railt/issues](https://github.com/railt/railt/issues)
 
-## Builder
+> Note: Tests can not always pass correctly. This may be due to the inaccessibility of 
+PPA servers for updating gcc and g++. The lexertl build requires the support of a modern 
+compiler inside Travis CI. In this case, a gray badge will be displayed with the message "Build Error".
 
-### Configuration
-
-```php
-<?php
-use Railt\Lexer\Builder;
-
-$builder = new Builder();
-
-$builder->withOption(Builder::OPTION_CASE_INSENSITIVE);
-$builder->withoutOption(Builder::OPTION_UNICODE);
-``` 
-
-**Options:**
-
-- `Builder::OPTION_CASE_INSENSITIVE` - Same with `i` modifier of [preg_xxx](http://php.net/manual/en/reference.pcre.pattern.modifiers.php) PHP functions.
-- `Builder::OPTION_MULTILINE` - Same with `m` modifier of [preg_xxx](http://php.net/manual/en/reference.pcre.pattern.modifiers.php) PHP functions.
-- `Builder::OPTION_DOT_ALL` - Same with `s` modifier of [preg_xxx](http://php.net/manual/en/reference.pcre.pattern.modifiers.php) PHP functions.
-- `Builder::OPTION_UNICODE` - Same with `u` modifier of [preg_xxx](http://php.net/manual/en/reference.pcre.pattern.modifiers.php) PHP functions.
-- `Builder::OPTION_KEEP_UNKNOWN` - Adds capture of undeclared tokens in the output.
-
-### Tokens Definition
+In order to quickly understand how it works - just write ~4 lines of code:
 
 ```php
-<?php
-use Railt\Lexer\Builder;
+$lexer = Railt\Component\Lexer\Factory::create(['T_WHITESPACE' => '\s+', 'T_DIGIT' => '\d+'], ['T_WHITESPACE']);
 
-$builder = new Builder();
-
-// $builder->add(string $token, string $pattern)
-
-$builder->add('T_DIGIT', '\d+');
-$builder->add('T_CONST', '\w+');
-$builder->add('T_WHITESPACE', '\s+');
-```
-
-### Multistate Tokens Definition
-
-```php
-<?php
-use Railt\Lexer\Builder;
-
-$builder = new Builder();
-
-// $builder->add(string $token, string $pattern, string $currentState, string $nextState)
-
-$builder->add('T_COMMENT_OPEN', '/\*\*', null, 'comment');
-$builder->add('T_COMMENT', '(?:(?!\*/).)+', 'comment');
-$builder->add('T_COMMENT_CLOSE', '\*/', 'comment', 'default');
-
-// Alter syntax
-// $builder->add('example', 'pattern')->in('state')->then('next state');
-```
-
-### Creating a Lexer
-
-```php
-<?php
-use Railt\Lexer\Builder;
-
-$builder = new Builder();
-
-// .... configuration
-
-// List of PCRE patterns
-$patterns = $builder->getPatterns();
-
-// List of token transitions
-$transitions = $builder->getJumps();
-```
-
-### Lexer Runtime
-
-```php
-<?php
-use Railt\Io\File;
-use Railt\Lexer\Builder;
-
-$builder = new Builder();
-
-// .... configuration
-
-/** @var \Railt\Lexer\LexerInterface $lexer */
-$lexer = $builder->build();
-
-// Runtime
-$file = File::fromPathname(__DIR__ . '/example.txt');
-
-foreach ($lexer->lex($file) as $token) {
+foreach ($lexer->lex(Railt\Component\Io\File::fromSources('23 42')) as $token) {
     echo $token . "\n";
-    
-    if ($token instanceof \Railt\Lexer\Token\Unknown) {
-        $exception = new \Railt\Lexer\Exception\UnrecognizedTokenException('Error');
-        $exception->throwsIn($file, $token->getOffset());
-        
-        throw $exception;
-    }
 }
 ```
+
+This example will read the source text and return the set of tokens from which it is composed:
+1) `T_DIGIT` with value "23"
+2) `T_DIGIT` with value "42"
+
+The second argument to the `Factory` class is the list of token names that are ignored in the `lex` method result. 
+That's why we only got two significant tokens `T_DIGIT`. Although this is not entirely true,
+the answer contains a `T_EOI` (End Of Input) token which can also be removed from the output 
+by adding an array of the second argument of `Factory` class.
+
+...and now let's try to understand more!
+
+The lexer contains two types of runtime:
+1) [`Basic`](#basic) - Set of algorithms with one state.
+2) [`Multistate`](#multistate) - Set of algorithms with the possibility of state transition between tokens.
+
+> In connection with the fact that there were almost no differences in 
+speed between several implementations (Stateful vs Stateless) of the same algorithm, 
+it was decided to abandon the immutable stateful lexers.
+
+```php
+use Railt\Component\Lexer\Factory;
+
+/**
+ * List of available tokens in format "name => pcre"
+ */
+$tokens = ['T_DIGIT' => '\d+', 'T_WHITESPACE' => '\s+'];
+
+/**
+ * List of skipped tokens
+ */
+$skip   = ['T_WHITESPACE'];
+
+/**
+ * Options:
+ *   0 - Nothing.
+ *   2 - With PCRE lookahead support.
+ *   4 - With multistate support.
+ */
+$flags = Factory::LOOKAHEAD | Factory::MULTISTATE;
+
+/**
+ * Create lexer and tokenize sources. 
+ */
+$lexer = Factory::create($tokens, $skip, $flags);
+```
+
+In order to tokenize the source text, you must use the method `->lex(...)`, which returns 
+iterator of the `TokenInterface` objects.
+
+```php
+foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
+    echo $token . "\n";
+}
+```
+
+A `TokenInterface` provides a convenient API to obtain information about a token:
+
+```php
+interface TokenInterface
+{
+    public function getName(): string;
+    public function getOffset(): int;
+    public function getValue(int $group = 0): ?string;
+    public function getGroups(): iterable;
+    public function getBytes(): int;
+    public function getLength(): int;
+}
+```
+
+## Drivers
+
+The factory returns one of the available implementations, however you can create it yourself.
+
+### Basic
+
+#### NativeRegex
+
+`NativeRegex` implementation is based on the built-in php PCRE functions.
+
+```php
+use Railt\Component\Lexer\Driver\NativeRegex;
+use Railt\Component\Io\File;
+
+$lexer = new NativeRegex(['T_WHITESPACE' => '\s+', 'T_DIGIT' => '\d+'], ['T_WHITESPACE', 'T_EOI']);
+
+foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
+    echo $token->getName() . ' -> ' . $token->getValue() . ' at ' . $token->getOffset() . "\n";
+}
+
+// Outputs:
+// T_DIGIT -> 23 at 0
+// T_DIGIT -> 42 at 3
+```
+
+#### Lexertl
+
+Experimental lexer based on the 
+[C++ lexertl library](https://github.com/BenHanson/lexertl). To use it, you 
+need support for [Parle extension](http://php.net/manual/en/book.parle.php).
+
+```php
+use Railt\Component\Lexer\Driver\ParleLexer;
+use Railt\Component\Io\File;
+
+$lexer = new ParleLexer(['T_WHITESPACE' => '\s+', 'T_DIGIT' => '\d+'], ['T_WHITESPACE', 'T_EOI']);
+
+foreach ($lexer->lex(File::fromSources('23 42')) as $token) {
+    echo $token->getName() . ' -> ' . $token->getValue() . ' at ' . $token->getOffset() . "\n";
+}
+
+// Outputs:
+// T_DIGIT -> 23 at 0
+// T_DIGIT -> 42 at 3
+```
+
+> Be careful: The library is not fully compatible with the PCRE regex 
+syntax. See the [official documentation](http://www.benhanson.net/lexertl.html).
+
+
+### Multistate
+
+This functionality is not yet implemented.

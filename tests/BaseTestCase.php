@@ -7,13 +7,13 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Component\Lexer\Exception;
+namespace Railt\Tests\Lexer;
 
-use Railt\Component\Exception\ExternalException;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Class LexerException
+ * Class BaseTestCase
  */
-abstract class LexerException extends ExternalException
+abstract class BaseTestCase extends TestCase
 {
 }

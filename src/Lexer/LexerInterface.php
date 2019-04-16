@@ -7,9 +7,10 @@
  */
 declare(strict_types=1);
 
-namespace Railt\Lexer;
+namespace Railt\Component\Lexer;
 
-use Railt\Io\Readable;
+use Railt\Component\Io\Readable;
+use Railt\Component\Lexer\Definition\TokenDefinition;
 
 /**
  * Interface LexerInterface
@@ -17,20 +18,15 @@ use Railt\Io\Readable;
 interface LexerInterface
 {
     /**
-     * @var string
-     */
-    public const T_UNKNOWN = 'T_UNKNOWN';
-
-    /**
-     * @var string
-     */
-    public const T_EOI = 'T_EOI';
-
-    /**
-     * Returns a tokens stream from the given source file.
+     * Compiling the current state of the lexer and returning stream tokens from the source file
      *
      * @param Readable $input
-     * @return iterable|TokenInterface[]
+     * @return \Traversable|TokenInterface[]
      */
-    public function lex(Readable $input): iterable;
+    public function lex(Readable $input): \Traversable;
+
+    /**
+     * @return iterable|TokenDefinition[]
+     */
+    public function getTokenDefinitions(): iterable;
 }

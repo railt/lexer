@@ -9,11 +9,9 @@ declare(strict_types=1);
 
 namespace Railt\Component\Lexer\Exception;
 
-use Railt\Component\Exception\ExternalException;
-
 /**
- * Class LexerException
+ * Class BadLexemeException
  */
-abstract class LexerException extends ExternalException
+class BadLexemeException extends \LogicException
 {
 }
